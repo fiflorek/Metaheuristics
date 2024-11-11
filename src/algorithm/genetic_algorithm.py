@@ -44,8 +44,8 @@ def selection(tournament_size: int, population: list[Individual]):
     return min(tournament, key=lambda ind: ind.fitness)
 
 
-def solve_cvrp_genetic(cvrp: Cvrp, config: Config) -> dict[int, Result]:
-    results = {}  # for each population save the best, average and best_genotype
+def solve_cvrp_genetic(cvrp: Cvrp, config: Config) -> list[Result]:
+    results = []  # for each population save the best, average and best_genotype
     population = initialize(config.population_size, cvrp)
     population.evaluate(cvrp)
     best = population.best_individual()
@@ -65,6 +65,6 @@ def solve_cvrp_genetic(cvrp: Cvrp, config: Config) -> dict[int, Result]:
         population = Population(new_population)
         population.evaluate(cvrp)
         best = population.best_individual()
-        results[i] = Result(best.fitness, population.average_individual(), best.genotype)
+        results.append(Result(best.fitness, population.average_individual(), best.genotype))
 
     return results

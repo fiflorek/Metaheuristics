@@ -1,8 +1,8 @@
 problem_instance: "A-n32-k5"
 no_of_runs: 1
-algorithm: "genetic"
-population_size: 1000
-generations: 500
+algorithm: "greedy"
+population_size: 10
+generations: 50
 crossover_probability: 0.6
 mutation_probability: 0.2
 mutation_type: 'swap'

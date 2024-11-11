@@ -1,3 +1,4 @@
+import sys
 import time
 from pathlib import Path
 
@@ -7,18 +8,14 @@ from algorithm.annealing_algorithm import solve_cvrp_annealing
 from algorithm.genetic_algorithm import solve_cvrp_genetic
 from algorithm.greedy_algorithm import solve_cvrp_greedy
 from algorithm.random_algorithm import solve_cvrp_random
+from algorithm.result import Result
 from problem.cvrp import read_problem, Cvrp
 from utils.configuration import Config
 from utils.enums import Algorithm
+from utils.file_utils import save_results_to_file, save_best_run_to_file
 
-
-# same result for each algorithm -
-# each algorithm should be solved_no_of_runs times and the best result should be saved
-# best, avg, best_genotype, execution_time, configuration -> save to file results.txt
-# best_genotype -> save to file best_run.txt
 
 def solve_problem(cvrp: Cvrp, config: Config) -> None:
-
     algorithm_mapping = {
         Algorithm.GENETIC: solve_cvrp_genetic,
         Algorithm.RANDOM: solve_cvrp_random,
@@ -29,18 +26,37 @@ def solve_problem(cvrp: Cvrp, config: Config) -> None:
     selected_algorithm = algorithm_mapping.get(config.algorithm)
 
     if selected_algorithm:
-        results = []
         start_time = time.time()
         if config.algorithm.is_metaheuristic():
+            global_best = sys.maxsize
+            global_avg = 0
+            global_best_genotype = []
+            global_best_run = []
             for i in range(config.no_of_runs):
-                results.append(selected_algorithm(cvrp, config))
+                run_i = selected_algorithm(cvrp, config)
+                for generation, run_i in run_i.items():
+                    if run_i.best < global_best:
+                        global_best = run_i.best
+                        global_best_genotype = run_i.best_genotype
+                        global_best_run = run_i
+                    global_avg += run_i.average
+            global_result = Result(global_best, global_avg, global_best_genotype)
+            end_time = time.time()
+            avg_execution_time = round((end_time - start_time) / config.no_of_runs, 2)
+
+            # As of now, best run saves only generation number, avg and best values.
+            # It disregards the best genotype of each generation - but it might be used in the future
+            best_run_data = [(generation_result.best, generation_result.average) for generation_result in global_best_run.values()]
+
+            save_best_run_to_file(best_run_data, config)
+            save_results_to_file(global_result, config, avg_execution_time)
         else:
             # No need to loop over greedy since its deterministic.
             # Random is not deterministic but let's not waste resources.
-            results.append(selected_algorithm(cvrp, config))
-        end_time = time.time()
-        execution_time = round((end_time - start_time) / config.no_of_runs if config.algorithm.is_metaheuristic() else end_time - start_time, 2)
-        save_results_to_file(results, config, execution_time)
+            result = selected_algorithm(cvrp, config)
+            end_time = time.time()
+            avg_execution_time = round(end_time - start_time, 2)
+            save_results_to_file(result, config, avg_execution_time)
     else:
         print(f"Algorithm {config.algorithm} not found")
         return

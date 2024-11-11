@@ -16,7 +16,7 @@ def find_nearest(cvrp: Cvrp, city_id: int, visited_cities: list[int]) -> int:
     return closest_index
 
 
-def solve_cvrp_greedy(cvrp: Cvrp, config: Config) -> dict[int, Result]:
+def solve_cvrp_greedy(cvrp: Cvrp, config: Config) -> Result:
     current_city_id = 0
     solution = [current_city_id]
     for _ in range(1, cvrp.no_of_cities):
@@ -27,4 +27,4 @@ def solve_cvrp_greedy(cvrp: Cvrp, config: Config) -> dict[int, Result]:
     best, average = cost(cvrp, solution)
     best_genotype = solution
 
-    return {0: Result(best, average, best_genotype)}
+    return Result(best, round(average, 2), best_genotype)

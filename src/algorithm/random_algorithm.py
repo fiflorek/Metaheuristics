@@ -11,7 +11,7 @@ def generate_random_solution(cvrp: Cvrp):
     return random.sample(city_ids, len(city_ids))
 
 
-def solve_cvrp_random(cvrp: Cvrp, config: Config) -> dict[int, Result]:
+def solve_cvrp_random(cvrp: Cvrp, config: Config) -> Result:
     no_of_solutions = config.population_size * config.generations
     best = sys.maxsize
     best_genotype = []
@@ -27,4 +27,4 @@ def solve_cvrp_random(cvrp: Cvrp, config: Config) -> dict[int, Result]:
         average += solution_cost
     average /= no_of_solutions
 
-    return {0: Result(best, average, best_genotype)}
+    return Result(best, round(average, 2), best_genotype)
