@@ -40,7 +40,8 @@ def solve_problem(cvrp: Cvrp, config: Config) -> None:
                         global_best_genotype = generation.best_genotype
                         global_best_run = run_i
                     global_avg += generation.average
-            global_result = Result(global_best, global_avg, global_best_genotype)
+            global_avg /= (config.no_of_runs * config.generations)
+            global_result = Result(global_best, round(global_avg, 2), global_best_genotype)
             end_time = time.time()
             avg_execution_time = round((end_time - start_time) / config.no_of_runs, 2)
 
