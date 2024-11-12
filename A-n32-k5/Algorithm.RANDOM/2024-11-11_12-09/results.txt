@@ -1,5 +1,0 @@
-Best: 1710.93
-Average: 2124.632140000001
-Best genotype: [24, 16, 21, 7, 5, 29, 8, 26, 9, 2, 4, 22, 12, 3, 30, 15, 18, 28, 11, 13, 31, 23, 14, 6, 1, 19, 17, 27, 25, 20, 10]
-Execution time: 0.01
-Configuration: <utils.configuration.Config object at 0x7f9b5e9399a0>
