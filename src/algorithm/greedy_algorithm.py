@@ -1,8 +1,8 @@
 import sys
 
 from algorithm.result import Result
-from problem.cvrp import cost
 from problem.cvrp import Cvrp
+from problem.cvrp import cost
 from utils.configuration import Config
 
 

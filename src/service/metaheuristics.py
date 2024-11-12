@@ -46,7 +46,8 @@ def solve_problem(cvrp: Cvrp, config: Config) -> None:
 
             # As of now, best run saves only generation number, avg and best values.
             # It disregards the best genotype of each generation - but it might be used in the future
-            best_run_data = [(generation_result.best, generation_result.average) for generation_result in global_best_run]
+            best_run_data = [(generation_result.best, generation_result.average) for generation_result in
+                             global_best_run]
 
             save_best_run_to_file(best_run_data, config)
             save_results_to_file(global_result, config, avg_execution_time)
@@ -73,73 +74,6 @@ def main():
     cvrp = read_problem(data_set_dir / f'{config.problem_instance}.vrp')
 
     solve_problem(cvrp, config)
-
-
-# def solve_problem():
-#     root_dir = Path(__file__).resolve().parents[2]
-#     config_file_path = root_dir / "config/config.yaml"
-#     data_set_dir = root_dir / "resources/data_set/A"
-#
-#     with open(config_file_path, 'r') as file:
-#         config = yaml.safe_load(file)
-#
-#     cvrp = read_problem(data_set_dir / f'{config["problem_instance"]}.vrp')
-#
-#     no_of_individuals = config["population_size"] * config["generations"] * config["no_of_runs"]
-#
-#     results = {}
-#
-#     available_algorithms = {
-#         Algorithm.GENETIC.value: solve_cvrp_genetic,
-#         Algorithm.RANDOM.value: solve_cvrp_random,
-#         Algorithm.GREEDY.value: solve_cvrp_greedy,
-#         Algorithm.ANNEALING.value: solve_cvrp_annealing
-#     }
-#
-#     selected_algorithm = available_algorithms.get(config["algorithm"])
-#     if selected_algorithm:
-#         selected_algorithm(cvrp, config)
-#     else:
-#         print(f"Algorithm {config['algorithm']} not found")
-#         return
-#
-#     if config["algorithm"] == 'genetic':
-#         best = sys.maxsize
-#         best_run_index = 0
-#         avg = 0
-#         best_genotype = []
-#         execution_time = 0
-#         ga_runs = []
-#         for i in range(config["no_of_runs"]):
-#             start_time = time.time()
-#             ga_run = solve_cvrp_genetic(cvrp, config)
-#             for result in ga_run:
-#                 if ga_run[result]["best"] < best:
-#                     best = ga_run[result]["best"]
-#                     best_genotype = ga_run[result]["best_genotype"]
-#                     best_run_index = i
-#                 avg += ga_run[result]["avg"]
-#
-#             end_time = time.time()
-#             execution_time += round(end_time - start_time, 2)
-#             ga_runs.append(ga_run)
-#             print(f"Run {i + 1} completed")
-#
-#         results = {"best": best, "avg": round(avg / (config["no_of_runs"] * config["generations"]), 2),
-#                    "best_genotype": best_genotype, "execution_time": round(execution_time / config["no_of_runs"], 2)}
-#         save_to_file(ga_runs[best_run_index], config, results)
-#     elif config["algorithm"] == 'random':
-#         start_time = time.time()
-#         results = solve_cvrp_random(cvrp, no_of_individuals)
-#         end_time = time.time()
-#         results["execution_time"] = round(end_time - start_time, 2)
-#     elif config["algorithm"] == 'greedy':
-#         start_time = time.time()
-#         results = solve_cvrp_greedy(cvrp)
-#         end_time = time.time()
-#         results["execution_time"] = round(end_time - start_time, 2)
-#
-#     print(results)
 
 
 if __name__ == '__main__':
