@@ -24,7 +24,7 @@ def solve_cvrp_greedy(cvrp: Cvrp, config: Config) -> Result:
         solution.append(nearest_city_id)
         current_city_id = nearest_city_id
 
-    best, average = cost(cvrp, solution)
+    best = average = cost(cvrp, solution)
     best_genotype = solution
 
     return Result(best, round(average, 2), best_genotype)

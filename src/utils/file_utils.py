@@ -25,7 +25,7 @@ def save_best_run_to_file(best_run: list[tuple[float, float]], config: Config) -
     best_run_file = results_dir / "best_run.txt"
 
     with open(best_run_file, 'w') as file:
-        for generation, (best, avg) in best_run:
+        for generation, (best, avg) in enumerate(best_run):
             file.write(f"{generation}, {best}, {avg}\n")
 
 

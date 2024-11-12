@@ -49,7 +49,7 @@ def solve_cvrp_genetic(cvrp: Cvrp, config: Config) -> list[Result]:
     population = initialize(config.population_size, cvrp)
     population.evaluate(cvrp)
     best = population.best_individual()
-    results[0] = Result(best.fitness, population.average_individual(), best.genotype)
+    results.append(Result(best.fitness, population.average_individual(), best.genotype))
 
     for i in range(1, config.generations):
         new_population = []
@@ -65,6 +65,6 @@ def solve_cvrp_genetic(cvrp: Cvrp, config: Config) -> list[Result]:
         population = Population(new_population)
         population.evaluate(cvrp)
         best = population.best_individual()
-        results.append(Result(best.fitness, population.average_individual(), best.genotype))
+        results.append(Result(best.fitness, round(population.average_individual(), 2), best.genotype))
 
     return results

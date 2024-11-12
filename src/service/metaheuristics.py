@@ -34,19 +34,19 @@ def solve_problem(cvrp: Cvrp, config: Config) -> None:
             global_best_run = []
             for i in range(config.no_of_runs):
                 run_i = selected_algorithm(cvrp, config)
-                for generation, run_i in run_i.items():
-                    if run_i.best < global_best:
-                        global_best = run_i.best
-                        global_best_genotype = run_i.best_genotype
+                for generation in run_i:
+                    if generation.best < global_best:
+                        global_best = generation.best
+                        global_best_genotype = generation.best_genotype
                         global_best_run = run_i
-                    global_avg += run_i.average
+                    global_avg += generation.average
             global_result = Result(global_best, global_avg, global_best_genotype)
             end_time = time.time()
             avg_execution_time = round((end_time - start_time) / config.no_of_runs, 2)
 
             # As of now, best run saves only generation number, avg and best values.
             # It disregards the best genotype of each generation - but it might be used in the future
-            best_run_data = [(generation_result.best, generation_result.average) for generation_result in global_best_run.values()]
+            best_run_data = [(generation_result.best, generation_result.average) for generation_result in global_best_run]
 
             save_best_run_to_file(best_run_data, config)
             save_results_to_file(global_result, config, avg_execution_time)
