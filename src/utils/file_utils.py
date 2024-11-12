@@ -29,21 +29,6 @@ def save_best_run_to_file(best_run: list[tuple[float, float]], config: Config) -
             file.write(f"{generation}, {best}, {avg}\n")
 
 
-# def save_to_file(ga_run, config, global_results):
-#     current_time = datetime.now().strftime("%Y-%m-%d_%H-%M")
-#     output_dir = Path(__file__).parent.parent.parent / f"{config['problem_instance']}/{current_time}"
-#     os.makedirs(output_dir, exist_ok=True)
-#     output_file_path = output_dir / "best_run.txt"
-#     with open(output_file_path, 'w') as file:
-#         for generation, data in ga_run.items():
-#             file.write(f"{generation}, {data['best']}, {data['avg']}\n")
-#     with open(output_dir / "results.txt", 'w') as file:
-#         file.write(f"Best: {global_results['best']}\n")
-#         file.write(f"Average: {global_results['avg']}\n")
-#         file.write(f"Execution time: {global_results['execution_time']}\n")
-#         file.write(f"Best genotype: {global_results['best_genotype']}\n")
-
-
 def get_or_create_results_dir(problem_instance, algorithm):
     current_time = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
     output_dir = root_dir / "results" / f"{problem_instance}/{algorithm}/{current_time}"

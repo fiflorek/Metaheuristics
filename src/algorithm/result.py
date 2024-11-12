@@ -1,7 +1,5 @@
 from typing import List
 
-from utils.configuration import Config
-
 
 class Result:
 
@@ -12,5 +10,3 @@ class Result:
 
     def __str__(self):
         return f"Best: {self.best}, Average: {self.average}, Best genotype: {self.best_genotype}"
-
-
