@@ -1,7 +1,7 @@
 # Metaheuristics
 
 ## Description
-This repository is a Python project that solves the **Capacitated Vehicle Routing Problem (CVRP)** using various metaheuristic algorithms.
+This repository is a Python project that solves the **Capacitated Vehicle Routing Problem (CVRP)**.
 The CVRP is an NP-hard problem, which is why metaheuristics are used to solve it.
 The problem consists of `n` locations and a symmetrical matrix of distances between these locations.
 The goal is to find the shortest route that visits all locations exactly once.
