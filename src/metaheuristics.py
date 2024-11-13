@@ -1,3 +1,4 @@
+import os
 import sys
 import time
 from pathlib import Path
@@ -65,7 +66,7 @@ def solve_problem(cvrp: Cvrp, config: Config) -> None:
 
 
 def main():
-    root_dir = Path(__file__).resolve().parents[2]
+    root_dir = Path(__file__).resolve().parents[1]
     config_file_path = root_dir / "config/config.yaml"
     data_set_dir = root_dir / "resources/data_set/A"
 
