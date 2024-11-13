@@ -52,7 +52,7 @@ algorithm: "greedy"
 5. Run the tests  
 `python -m unittest discover -s test`
 6. Run the program  
-`python src/main.py`
+`python src/metaheuristics.py`
 The results are saved in the "results" directory relative to where the script is run from.
 
 ## Algorithms
