@@ -65,7 +65,7 @@ In this program the number of solutions generated equals `population_size * gene
 ### Genetic Algorithm
 Genetic algorithm is a metaheuristic inspired by the process of natural selection. It works by generating a population of solutions and then evolving them over a number of generations. The algorithm uses crossover and mutation operators to create new solutions.  
 #### Flow Diagram  
-![flow_diagram.png](..%2FDiagrams%2Fflow_diagram.png)  
+![flow_diagram](https://github.com/user-attachments/assets/e3b84eb7-8fa0-489e-9702-ddb6ff0e075f)
 #### Operators
 **Mutation** - as the name suggests, this operator changes the solution. This project has two types of mutation implemented: swap and inversion.
 Swap mutation swaps two random genes(cities in cvrp case) in the solution. ```[1, 2, 3, 4, 5]``` -> ```[1, 5, 3, 4, 2]```  
