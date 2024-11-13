@@ -3,28 +3,38 @@ import sys
 from algorithm.result import Result
 from problem.cvrp import Cvrp
 from problem.cvrp import cost
-from utils.configuration import Config
+
+from src.algorithm.algorithm import Algorithm
 
 
-def find_nearest(cvrp: Cvrp, city_id: int, visited_cities: list[int]) -> int:
-    closest = sys.maxsize
-    closest_index = 0
-    for i, value in enumerate(cvrp.distances_matrix[city_id]):
-        if i not in visited_cities and value < closest:
-            closest_index = i
-            closest = value
-    return closest_index
+class GreedyAlgorithm(Algorithm):
+    _current_city: int
+    _visited_cities: list[int]
 
+    def _initialize_algorithm(self) -> None:
+        self.visit_city(0)
 
-def solve_cvrp_greedy(cvrp: Cvrp, config: Config) -> Result:
-    current_city_id = 0
-    solution = [current_city_id]
-    for _ in range(1, cvrp.no_of_cities):
-        nearest_city_id = find_nearest(cvrp, current_city_id, solution)
-        solution.append(nearest_city_id)
-        current_city_id = nearest_city_id
+    @property
+    def current_city(self) -> int:
+        return self._current_city
 
-    best = average = cost(cvrp, solution)
-    best_genotype = solution
+    @property
+    def visited_cities(self) -> list[int]:
+        return self._visited_cities
 
-    return Result(best, round(average, 2), best_genotype)
+    def visit_city(self, city_id: int) -> None:
+        self._current_city = city_id
+        self._visited_cities.append(city_id)
+
+    def find_nearest_city_not_yet_visited(self) -> int:
+        return min(range(self.no_of_cities), key=lambda city: self.distances_matrix[self.current_city][
+            city] if city not in self.visited_cities else sys.maxsize)
+
+    def solve(self) -> Result:
+        for _ in range(1, self._cvrp.no_of_cities):
+            self.visit_city(self.find_nearest_city_not_yet_visited())
+
+        best = average = cost(self.cvrp, self.visited_cities)
+        best_genotype = self.visited_cities
+
+        return Result(best, round(average, 2), best_genotype)

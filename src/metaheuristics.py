@@ -12,16 +12,16 @@ from algorithm.random_algorithm import solve_cvrp_random
 from algorithm.result import Result
 from problem.cvrp import read_problem, Cvrp
 from utils.configuration import Config
-from utils.enums import Algorithm
+from utils.enums import AlgorithmName
 from utils.file_utils import save_results_to_file, save_best_run_to_file
 
 
 def solve_problem(cvrp: Cvrp, config: Config) -> None:
     algorithm_mapping = {
-        Algorithm.GENETIC: solve_cvrp_genetic,
-        Algorithm.RANDOM: solve_cvrp_random,
-        Algorithm.GREEDY: solve_cvrp_greedy,
-        Algorithm.ANNEALING: solve_cvrp_annealing
+        AlgorithmName.GENETIC: solve_cvrp_genetic,
+        AlgorithmName.RANDOM: solve_cvrp_random,
+        AlgorithmName.GREEDY: solve_cvrp_greedy,
+        AlgorithmName.ANNEALING: solve_cvrp_annealing
     }
 
     selected_algorithm = algorithm_mapping.get(config.algorithm)
