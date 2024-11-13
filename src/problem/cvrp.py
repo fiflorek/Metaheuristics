@@ -1,9 +1,36 @@
 import math
+from dataclasses import dataclass
 
 from utils.enums import DataFileConstants as DFC
 
 
-def read_problem(file_path: str) -> 'Cvrp':
+class Cvrp:
+    def __init__(self, no_of_cities, truck_capacity, cities, depot_number):
+        self.no_of_cities = no_of_cities
+        self.truck_capacity = truck_capacity
+        self.cities = cities
+        self.depot_number = depot_number
+        self.distances_matrix = self._init_distances_matrix()
+
+    def _init_distances_matrix(self) -> list[list[float]]:
+        matrix = [[0 for _ in range(self.no_of_cities)] for _ in range(self.no_of_cities)]
+        for i, row in enumerate(matrix):
+            for j, element in enumerate(row):
+                matrix[i][j] = distance(self.cities[i], self.cities[j])
+        return matrix
+
+    def print_distances_matrix(self) -> None:
+        for i, row in enumerate(self.distances_matrix):
+            for j, element in enumerate(row):
+                print(self.distances_matrix[i][j], end=' ')
+            print()
+
+    def __str__(self):
+        print(
+            f"CVRP(no_of_cities={self.no_of_cities}, truck_capacity={self.truck_capacity}, depot_number={self.depot_number})")
+
+
+def read_problem(file_path: str) -> Cvrp:
     no_of_cities = 0
     truck_capacity = 0
     city_coordinates = []
@@ -38,8 +65,8 @@ def read_problem(file_path: str) -> 'Cvrp':
     return Cvrp(no_of_cities, truck_capacity, cities, depot_number - 1)  # - 1 to adjust that arrays start from 0
 
 
-#this function needs to be refactored - take into account when truck is ie. 80% empty - maybe then turn back instead of going to depot only when its empty
-def cost(cvrp: 'Cvrp', route: list[int]) -> float:
+# this function needs to be refactored - take into account when truck is ie. 80% empty - maybe then turn back instead of going to depot only when its empty
+def cost(cvrp: Cvrp, route: list[int]) -> float:
     # first step is from depot to first city
     depot_city_number = cvrp.depot_number
     first_city = cvrp.cities[route[0]]
@@ -60,42 +87,13 @@ def cost(cvrp: 'Cvrp', route: list[int]) -> float:
     return round(route_cost, 2)
 
 
-def distance(city_a: 'City', city_b: 'City') -> float:
-    return round(math.sqrt((city_a.x - city_b.x) ** 2 + (city_a.y - city_b.y) ** 2), 2)
-
-
-class Cvrp:
-    def __init__(self, no_of_cities, truck_capacity, cities, depot_number):
-        self.no_of_cities = no_of_cities
-        self.truck_capacity = truck_capacity
-        self.cities = cities
-        self.depot_number = depot_number
-        self.distances_matrix = self._init_distances_matrix()
-
-    def _init_distances_matrix(self) -> list[list[float]]:
-        matrix = [[0 for _ in range(self.no_of_cities)] for _ in range(self.no_of_cities)]
-        for i, row in enumerate(matrix):
-            for j, element in enumerate(row):
-                matrix[i][j] = distance(self.cities[i], self.cities[j])
-        return matrix
-
-    def print_distances_matrix(self) -> None:
-        for i, row in enumerate(self.distances_matrix):
-            for j, element in enumerate(row):
-                print(self.distances_matrix[i][j], end=' ')
-            print()
-
-    def __str__(self):
-        print(
-            f"CVRP(no_of_cities={self.no_of_cities}, truck_capacity={self.truck_capacity}, depot_number={self.depot_number})")
-
-
+@dataclass
 class City:
-    def __init__(self, city_number, x, y, demand):
-        self.city_number = city_number
-        self.x = x
-        self.y = y
-        self.demand = demand
+    city_number: int
+    x: int
+    y: int
+    demand: int
 
-    def __str__(self):
-        print(f"City(number={self.city_number}, x={self.x}, y={self.y}, demand={self.demand})")
+
+def distance(city_a: City, city_b: City) -> float:
+    return round(math.sqrt((city_a.x - city_b.x) ** 2 + (city_a.y - city_b.y) ** 2), 2)
