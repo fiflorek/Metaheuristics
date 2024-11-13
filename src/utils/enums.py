@@ -21,6 +21,11 @@ class Selection(Enum):
     TOURNAMENT = 'tournament'
 
 
+class Crossover(Enum):
+    PMX = 'pmx'
+    OX = 'ox'
+
+
 class DataFileConstants(Enum):
     NAME = 'NAME'
     COMMENT = 'COMMENT'

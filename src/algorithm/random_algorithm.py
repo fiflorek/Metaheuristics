@@ -6,7 +6,7 @@ from problem.cvrp import cost, Cvrp
 from utils.configuration import Config
 
 
-def generate_random_solution(cvrp: Cvrp):
+def generate_random_solution(cvrp: Cvrp) -> list[int]:
     city_ids = list(range(1, cvrp.no_of_cities))
     return random.sample(city_ids, len(city_ids))
 

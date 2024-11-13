@@ -12,21 +12,21 @@ class Population:
     def __init__(self, population: list[Individual]):
         self.population = population
 
-    def best_individual(self):
+    def best_individual(self) -> Individual:
         return min(self.population, key=lambda ind: ind.fitness)
 
-    def average_individual(self):
+    def average_individual_fitness(self) -> float:
         return round(sum([ind.fitness for ind in self.population]) / len(self.population), 2)
 
-    def worst_individual(self):
+    def worst_individual(self) -> Individual:
         return max(self.population, key=lambda ind: ind.fitness)
 
-    def evaluate(self, cvrp):
+    def evaluate(self, cvrp: Cvrp) -> None:
         for ind in self.population:
             ind.evaluate(cvrp)
 
 
-def initialize(population_size: int, cvrp):
+def initialize(population_size: int, cvrp: Cvrp) -> Population:
     population = []
     for _ in range(population_size):
         genotype = list(range(1, cvrp.no_of_cities))
@@ -36,7 +36,7 @@ def initialize(population_size: int, cvrp):
     return Population(population)
 
 
-def selection(tournament_size: int, population: list[Individual]):
+def selection(tournament_size: int, population: list[Individual]) -> Individual:
     tournament = []
     for i in range(tournament_size):
         tournament.append(population[random.randint(0, len(population) - 1)])
@@ -45,11 +45,11 @@ def selection(tournament_size: int, population: list[Individual]):
 
 
 def solve_cvrp_genetic(cvrp: Cvrp, config: Config) -> list[Result]:
-    results = []  # for each population save the best, average and best_genotype
+    results = []
     population = initialize(config.population_size, cvrp)
     population.evaluate(cvrp)
     best = population.best_individual()
-    results.append(Result(best.fitness, population.average_individual(), best.genotype))
+    results.append(Result(best.fitness, population.average_individual_fitness(), best.genotype))
 
     for i in range(1, config.generations):
         new_population = []
@@ -65,6 +65,6 @@ def solve_cvrp_genetic(cvrp: Cvrp, config: Config) -> list[Result]:
         population = Population(new_population)
         population.evaluate(cvrp)
         best = population.best_individual()
-        results.append(Result(best.fitness, round(population.average_individual(), 2), best.genotype))
+        results.append(Result(best.fitness, round(population.average_individual_fitness(), 2), best.genotype))
 
     return results
