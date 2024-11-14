@@ -7,8 +7,8 @@ import yaml
 
 from algorithm.annealing_algorithm import solve_cvrp_annealing
 from algorithm.genetic_algorithm import solve_cvrp_genetic
-from algorithm.greedy_algorithm import solve_cvrp_greedy
-from algorithm.random_algorithm import solve_cvrp_random
+from algorithm.greedy_algorithm import GreedyAlgorithm
+from algorithm.random_algorithm import RandomAlgorithm
 from algorithm.result import Result
 from problem.cvrp import read_problem, Cvrp
 from utils.configuration import Config
@@ -19,8 +19,8 @@ from utils.file_utils import save_results_to_file, save_best_run_to_file
 def solve_problem(cvrp: Cvrp, config: Config) -> None:
     algorithm_mapping = {
         AlgorithmName.GENETIC: solve_cvrp_genetic,
-        AlgorithmName.RANDOM: solve_cvrp_random,
-        AlgorithmName.GREEDY: solve_cvrp_greedy,
+        AlgorithmName.RANDOM: RandomAlgorithm(cvrp, config).solve,
+        AlgorithmName.GREEDY: GreedyAlgorithm(cvrp, config).solve,
         AlgorithmName.ANNEALING: solve_cvrp_annealing
     }
 
@@ -56,7 +56,7 @@ def solve_problem(cvrp: Cvrp, config: Config) -> None:
         else:
             # No need to loop over greedy since its deterministic.
             # Random is not deterministic but let's not waste resources.
-            result = selected_algorithm(cvrp, config)
+            result = selected_algorithm()
             end_time = time.time()
             avg_execution_time = round(end_time - start_time, 2)
             save_results_to_file(result, config, avg_execution_time)

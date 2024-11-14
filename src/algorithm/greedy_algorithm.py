@@ -11,6 +11,7 @@ class GreedyAlgorithm(Algorithm):
     _visited_cities: list[int]
 
     def _initialize_algorithm(self) -> None:
+        self._visited_cities = []
         self.visit_city(0)
 
     @property
