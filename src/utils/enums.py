@@ -1,14 +1,14 @@
 from enum import Enum
 
 
-class Algorithm(Enum):
+class AlgorithmName(Enum):
     GENETIC = 'genetic'
     RANDOM = 'random'
     GREEDY = 'greedy'
     ANNEALING = 'annealing'
 
     def is_metaheuristic(self):
-        return self in [Algorithm.GENETIC, Algorithm.ANNEALING]
+        return self in [AlgorithmName.GENETIC, AlgorithmName.ANNEALING]
 
 
 class Mutation(Enum):

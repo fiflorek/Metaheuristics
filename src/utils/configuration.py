@@ -1,13 +1,13 @@
 from typing import Any, Dict
 
-from utils.enums import Algorithm
+from utils.enums import AlgorithmName
 
 
 class Config:
     def __init__(self, config_dict: Dict[str, Any]):
         self.problem_instance = config_dict.get("problem_instance", "A-n32-k5")
         self.no_of_runs = config_dict.get("no_of_runs", 1)
-        self.algorithm = Algorithm(config_dict.get("algorithm", "random"))
+        self.algorithm = AlgorithmName(config_dict.get("algorithm", "random"))
         self.population_size = config_dict.get("population_size", 100)
         self.generations = config_dict.get("generations", 10)
         self.crossover_probability = config_dict.get("crossover_probability")
