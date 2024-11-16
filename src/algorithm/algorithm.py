@@ -31,6 +31,10 @@ class Algorithm(ABC):
     def config(self) -> Config:
         return self._config
 
+    @property
+    def depot_number(self) -> int:
+        return self.cvrp.depot_number
+
     @abstractmethod
     def _initialize_algorithm(self) -> None:
         """Initializes the algorithm. """
