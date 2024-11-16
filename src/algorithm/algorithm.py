@@ -9,10 +9,12 @@ class Algorithm(ABC):
     """Base class for algorithms."""
     _cvrp: Cvrp
     _config: Config
+    _result_list: list[Result]
 
     def __init__(self, cvrp: Cvrp, config: Config) -> None:
         self._cvrp = cvrp
         self._config = config
+        self._result_list = []
         self._initialize_algorithm()
 
     @property
@@ -22,6 +24,14 @@ class Algorithm(ABC):
     @property
     def no_of_cities(self) -> int:
         return self.cvrp.no_of_cities
+
+    @property
+    def population_size(self) -> int:
+        return self.config.population_size
+
+    @property
+    def generations(self) -> int:
+        return self.config.generations
 
     @property
     def distances_matrix(self) -> list[list[int]]:
@@ -35,12 +45,16 @@ class Algorithm(ABC):
     def depot_number(self) -> int:
         return self.cvrp.depot_number
 
+    @property
+    def result_list(self) -> list[Result]:
+        return self._result_list
+
     @abstractmethod
     def _initialize_algorithm(self) -> None:
         """Initializes the algorithm. """
         ...
 
     @abstractmethod
-    def solve(self) -> Result:
+    def solve(self) -> list[Result]:
         """Solves the CVRP problem."""
         ...
