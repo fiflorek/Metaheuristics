@@ -12,7 +12,7 @@ class RandomAlgorithm(Algorithm):
     def _initialize_algorithm(self) -> None:
         pass
 
-    def solve(self) -> Result:
+    def solve(self) -> list[Result]:
         no_of_solutions = self.config.population_size * self.config.generations
         best = sys.maxsize
         best_genotype = []
@@ -28,7 +28,9 @@ class RandomAlgorithm(Algorithm):
             average += solution_cost
         average /= no_of_solutions
 
-        return Result(best, round(average, 2), best_genotype)
+        self.result_list.append(Result(best, round(average, 2), best_genotype))
+
+        return self.result_list
 
     def generate_random_solution(self) -> list[int]:
         city_ids = list(range(1, self.no_of_cities))

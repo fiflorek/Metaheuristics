@@ -34,7 +34,7 @@ class GreedyAlgorithm(Algorithm):
 
     # search through not visited cities. Find the nearest one
 
-    def solve(self) -> Result:
+    def solve(self) -> list[Result]:
         for i in range(1, self._cvrp.no_of_cities):
             self.visit_city(self.find_nearest_city_not_yet_visited(), i)
 
@@ -43,4 +43,6 @@ class GreedyAlgorithm(Algorithm):
         # not including depot number in the solution (0)
         genotype.remove(self.depot_number)
 
-        return Result(best, round(average, 2), genotype)
+        self.result_list.append(Result(best, round(average, 2), genotype))
+
+        return self.result_list

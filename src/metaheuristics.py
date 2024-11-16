@@ -6,7 +6,7 @@ from pathlib import Path
 import yaml
 
 from algorithm.annealing_algorithm import solve_cvrp_annealing
-from algorithm.genetic_algorithm import solve_cvrp_genetic
+from algorithm.genetic_algorithm import GeneticAlgorithm
 from algorithm.greedy_algorithm import GreedyAlgorithm
 from algorithm.random_algorithm import RandomAlgorithm
 from algorithm.result import Result
@@ -18,7 +18,7 @@ from utils.file_utils import save_results_to_file, save_best_run_to_file
 
 def solve_problem(cvrp: Cvrp, config: Config) -> None:
     algorithm_mapping = {
-        AlgorithmName.GENETIC: solve_cvrp_genetic,
+        AlgorithmName.GENETIC: GeneticAlgorithm(cvrp, config).solve,
         AlgorithmName.RANDOM: RandomAlgorithm(cvrp, config).solve,
         AlgorithmName.GREEDY: GreedyAlgorithm(cvrp, config).solve,
         AlgorithmName.ANNEALING: solve_cvrp_annealing
@@ -34,7 +34,7 @@ def solve_problem(cvrp: Cvrp, config: Config) -> None:
             global_best_genotype = []
             global_best_run = []
             for i in range(config.no_of_runs):
-                run_i = selected_algorithm(cvrp, config)
+                run_i = selected_algorithm()
                 for generation in run_i:
                     if generation.best < global_best:
                         global_best = generation.best
@@ -56,7 +56,7 @@ def solve_problem(cvrp: Cvrp, config: Config) -> None:
         else:
             # No need to loop over greedy since its deterministic.
             # Random is not deterministic but let's not waste resources.
-            result = selected_algorithm()
+            result = selected_algorithm()[0]
             end_time = time.time()
             avg_execution_time = round(end_time - start_time, 2)
             save_results_to_file(result, config, avg_execution_time)
