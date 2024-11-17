@@ -1,5 +1,6 @@
 import random
 
+from algorithm.algorithm import Algorithm
 from algorithm.result import Result
 from problem import individual
 from problem.cvrp import Cvrp
@@ -26,45 +27,83 @@ class Population:
             ind.evaluate(cvrp)
 
 
-def initialize(population_size: int, cvrp: Cvrp) -> Population:
-    population = []
-    for _ in range(population_size):
-        genotype = list(range(1, cvrp.no_of_cities))
-        random.shuffle(genotype)
-        population.append(Individual(genotype))
+class GeneticAlgorithm(Algorithm):
 
-    return Population(population)
+    _current_population: Population
+    _current_best: Individual
 
+    def _initialize_algorithm(self) -> None:
+        self.initialize_population()
+        self.current_population.evaluate(self.cvrp)
+        self.current_best = self.current_population.best_individual()
+        self.result_list.append(Result(self.current_best.fitness,
+                                       self.current_population.average_individual_fitness(), self.current_best.genotype))
 
-def selection(tournament_size: int, population: list[Individual]) -> Individual:
-    tournament = []
-    for i in range(tournament_size):
-        tournament.append(population[random.randint(0, len(population) - 1)])
+    @property
+    def current_population(self) -> Population:
+        return self._current_population
 
-    return min(tournament, key=lambda ind: ind.fitness)
+    @current_population.setter
+    def current_population(self, population: Population) -> None:
+        self._current_population = population
 
+    @property
+    def current_best(self) -> Individual:
+        return self._current_best
 
-def solve_cvrp_genetic(cvrp: Cvrp, config: Config) -> list[Result]:
-    results = []
-    population = initialize(config.population_size, cvrp)
-    population.evaluate(cvrp)
-    best = population.best_individual()
-    results.append(Result(best.fitness, population.average_individual_fitness(), best.genotype))
+    @current_best.setter
+    def current_best(self, best: Individual) -> None:
+        self._current_best = best
 
-    for i in range(1, config.generations):
-        new_population = []
-        for j in range(config.population_size):
-            parent_a = selection(config.tournament_size, population.population)
-            parent_b = selection(config.tournament_size, population.population)
-            child_genotype = parent_a.genotype[:]
-            if random.random() < config.crossover_probability:
-                child_genotype = individual.cross(parent_a.genotype, parent_b.genotype)
-            if random.random() < config.mutation_probability:
-                child_genotype = individual.mutate(child_genotype, config.mutation_type)
-            new_population.append(Individual(child_genotype))
-        population = Population(new_population)
-        population.evaluate(cvrp)
-        best = population.best_individual()
-        results.append(Result(best.fitness, round(population.average_individual_fitness(), 2), best.genotype))
+    @property
+    def tournament_size(self):
+        return self.config.tournament_size
 
-    return results
+    @property
+    def crossover_probability(self):
+        return self.config.crossover_probability
+
+    @property
+    def mutation_probability(self):
+        return self.config.mutation_probability
+
+    @property
+    def mutation_type(self):
+        return self.config.mutation_type
+
+    def selection(self, population: list[Individual]) -> Individual:
+        tournament = []
+        for i in range(self.tournament_size):
+            tournament.append(population[random.randint(0, len(population) - 1)])
+
+        return min(tournament, key=lambda ind: ind.fitness)
+
+    def initialize_population(self) -> None:
+        population = []
+        for _ in range(self.population_size):
+            genotype = list(range(1, self.no_of_cities))
+            random.shuffle(genotype)
+            population.append(Individual(genotype))
+
+        self.current_population = Population(population)
+
+    def solve(self) -> list[Result]:
+
+        for i in range(1, self.generations):
+            new_population = []
+            for j in range(self.population_size):
+                parent_a = self.selection(self.current_population.population)
+                parent_b = self.selection(self.current_population.population)
+                child_genotype = parent_a.genotype[:]
+                if random.random() < self.crossover_probability:
+                    child_genotype = individual.cross(parent_a.genotype, parent_b.genotype)
+                if random.random() < self.mutation_probability:
+                    child_genotype = individual.mutate(child_genotype, self.mutation_type)
+                new_population.append(Individual(child_genotype))
+            self.current_population = Population(new_population)
+            self.current_population.evaluate(self.cvrp)
+            self.current_best = self.current_population.best_individual()
+            self.result_list.append(Result(self.current_best.fitness,
+                                           round(self.current_population.average_individual_fitness(), 2), self.current_best.genotype))
+
+        return self.result_list
