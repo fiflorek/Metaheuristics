@@ -1,4 +1,3 @@
-import os
 import sys
 import time
 from pathlib import Path
@@ -10,10 +9,10 @@ from algorithm.genetic_algorithm import GeneticAlgorithm
 from algorithm.greedy_algorithm import GreedyAlgorithm
 from algorithm.random_algorithm import RandomAlgorithm
 from algorithm.result import Result
-from problem.cvrp import read_problem, Cvrp
+from problem.cvrp import Cvrp
 from utils.configuration import Config
 from utils.enums import AlgorithmName
-from utils.file_utils import save_results_to_file, save_best_run_to_file
+from utils.file_utils import save_results_to_file, save_best_run_to_file, read_problem
 
 
 def solve_problem(cvrp: Cvrp, config: Config) -> None:
