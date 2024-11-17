@@ -2,8 +2,17 @@ import math
 from dataclasses import dataclass
 
 
+@dataclass(frozen=True)
+class City:
+    city_number: int
+    x: int
+    y: int
+    demand: int
+
+
 class Cvrp:
-    def __init__(self, no_of_cities, truck_capacity, cities, depot_number):
+
+    def __init__(self, no_of_cities: int, truck_capacity: int, cities: list[City], depot_number:int):
         self.no_of_cities = no_of_cities
         self.truck_capacity = truck_capacity
         self.cities = cities
@@ -27,6 +36,9 @@ class Cvrp:
         print(
             f"CVRP(no_of_cities={self.no_of_cities}, truck_capacity={self.truck_capacity}, depot_number={self.depot_number})")
 
+def distance(city_a: City, city_b: City) -> float:
+    return round(math.sqrt((city_a.x - city_b.x) ** 2 + (city_a.y - city_b.y) ** 2), 2)
+
 
 # this function needs to be refactored - take into account when truck is ie. 80% empty - maybe then turn back instead of going to depot only when its empty
 def cost(cvrp: Cvrp, route: list[int]) -> float:
@@ -49,14 +61,3 @@ def cost(cvrp: Cvrp, route: list[int]) -> float:
     route_cost += cvrp.distances_matrix[depot_city_number][last_city.city_number]
     return round(route_cost, 2)
 
-
-@dataclass
-class City:
-    city_number: int
-    x: int
-    y: int
-    demand: int
-
-
-def distance(city_a: City, city_b: City) -> float:
-    return round(math.sqrt((city_a.x - city_b.x) ** 2 + (city_a.y - city_b.y) ** 2), 2)

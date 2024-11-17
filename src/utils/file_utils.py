@@ -38,7 +38,7 @@ def get_or_create_results_dir(problem_instance, algorithm):
     return output_dir
 
 
-def read_problem(file_path: str) -> Cvrp:
+def read_problem(file_path: Path) -> Cvrp:
     no_of_cities = 0
     truck_capacity = 0
     city_coordinates = []
