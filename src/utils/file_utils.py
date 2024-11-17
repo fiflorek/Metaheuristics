@@ -33,7 +33,7 @@ def save_best_run_to_file(best_run: list[tuple[float, float]], config: Config) -
 
 def get_or_create_results_dir(problem_instance, algorithm):
     current_time = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-    output_dir = root_dir / "results" / f"{problem_instance}/{algorithm}/{current_time}"
+    output_dir = root_dir / "results" / f"{problem_instance}/{algorithm.name}/{current_time}"
     os.makedirs(output_dir, exist_ok=True)
     return output_dir
 

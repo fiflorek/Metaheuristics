@@ -12,7 +12,7 @@ class City:
 
 class Cvrp:
 
-    def __init__(self, no_of_cities: int, truck_capacity: int, cities: list[City], depot_number:int):
+    def __init__(self, no_of_cities: int, truck_capacity: int, cities: list[City], depot_number: int):
         self.no_of_cities = no_of_cities
         self.truck_capacity = truck_capacity
         self.cities = cities
@@ -35,6 +35,7 @@ class Cvrp:
     def __str__(self):
         print(
             f"CVRP(no_of_cities={self.no_of_cities}, truck_capacity={self.truck_capacity}, depot_number={self.depot_number})")
+
 
 def distance(city_a: City, city_b: City) -> float:
     return round(math.sqrt((city_a.x - city_b.x) ** 2 + (city_a.y - city_b.y) ** 2), 2)
@@ -60,4 +61,3 @@ def cost(cvrp: Cvrp, route: list[int]) -> float:
         current_truck_capacity -= next_city.demand
     route_cost += cvrp.distances_matrix[depot_city_number][last_city.city_number]
     return round(route_cost, 2)
-
