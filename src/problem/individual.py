@@ -1,6 +1,7 @@
 import random
 
 from problem.cvrp import cost, Cvrp
+from utils.enums import Crossover, Mutation
 
 
 class Individual:
@@ -19,7 +20,14 @@ class Individual:
             Individual.fitness_cache[genotype_hash] = self.fitness
 
 
-def cross(parent_a: list[int], parent_b: list[int]) -> list[int]:
+def cross(parent_a: list[int], parent_b: list[int], crossover_type: Crossover) -> tuple[list[int], list[int]]:
+    if crossover_type.OX:
+        return cross_ox(parent_a, parent_b), cross_ox(parent_b, parent_a)
+    else:
+        return cross_pmx(parent_a, parent_b)
+
+
+def cross_ox(parent_a: list[int], parent_b: list[int]) -> list[int]:
     child = [0 for _ in range(len(parent_a))]
     swap_index_a, swap_index_b = generate_two_random_indexes(len(parent_a) - 1)
     assigned_genes = set()
@@ -35,14 +43,33 @@ def cross(parent_a: list[int], parent_b: list[int]) -> list[int]:
     return child
 
 
-def mutate(individual: list[int], mutation_type: str) -> list[int]:
-    if mutation_type == 'swap':
-        return mutate_by_swap(individual)
+def cross_pmx(parent_a: list[int], parent_b: list[int]) -> tuple[list[int], list[int]]:
+    swap_index_a, swap_index_b = generate_two_random_indexes(len(parent_a) - 1)
+    child_a = parent_b
+    child_b = parent_a
+    if swap_index_a != 0 and swap_index_b != len(parent_a) - 1:
+        cross_map = {}
+        for i in range(swap_index_a, swap_index_b + 1):
+            # if <3, 4> in map don't add <4, 9> just skip it
+            if parent_a[i] not in cross_map and parent_b[i] not in cross_map:
+                cross_map[parent_a[i]] = parent_b[i]
+                cross_map[parent_b[i]] = parent_a[i]
+        for i in range(len(child_a)):
+            if child_a[i] in cross_map:
+                child_a[i] = cross_map[child_a[i]]
+            if child_b[i] in cross_map:
+                child_b[i] = cross_map[child_b[i]]
+    return child_a, child_b
+
+
+def mutate(individual: list[int], mutation_type: Mutation) -> list[int]:
+    if mutation_type.SWAP:
+        return mutate_swap(individual)
     else:
-        return mutate_by_inversion(individual)
+        return mutate_inversion(individual)
 
 
-def mutate_by_swap(individual: list[int]) -> list[int]:
+def mutate_swap(individual: list[int]) -> list[int]:
     swap_index_a, swap_index_b = generate_two_random_indexes(len(individual) - 1)
 
     swap(individual, swap_index_a, swap_index_b)
@@ -50,7 +77,7 @@ def mutate_by_swap(individual: list[int]) -> list[int]:
     return individual
 
 
-def mutate_by_inversion(individual: list[int]) -> list[int]:
+def mutate_inversion(individual: list[int]) -> list[int]:
     swap_index_a, swap_index_b = generate_two_random_indexes(len(individual) - 1)
 
     while swap_index_a < swap_index_b:

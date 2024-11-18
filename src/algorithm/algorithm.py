@@ -3,6 +3,7 @@ from abc import abstractmethod, ABC
 from src.algorithm.result import Result
 from src.problem.cvrp import Cvrp
 from src.utils.configuration import Config
+from utils.enums import Crossover
 
 
 class Algorithm(ABC):
@@ -44,6 +45,10 @@ class Algorithm(ABC):
     @property
     def depot_number(self) -> int:
         return self.cvrp.depot_number
+
+    @property
+    def crossover_type(self) -> Crossover:
+        return self.config.crossover_type
 
     @property
     def result_list(self) -> list[Result]:

@@ -70,10 +70,11 @@ Genetic algorithm is a metaheuristic inspired by the process of natural selectio
 **Mutation** - as the name suggests, this operator changes the solution. This project has two types of mutation implemented: swap and inversion.
 Swap mutation swaps two random genes(cities in cvrp case) in the solution. ```[1, 2, 3, 4, 5]``` -> ```[1, 5, 3, 4, 2]```  
 Inversion mutation inverts a random segment of the solution.  ```[1, 2, 3, 4, 5]``` -> ```[1, 4, 3, 2, 5]```  
-**Crossover** - this operator combines two solutions to create a new one. This project has one type of crossover implemented so far: OX (Order Crossover).
+**Crossover** - this operator combines two solutions to create a new one. This project has two types of crossover implemented so far: OX (Order Crossover) and PMX (Partially Matched Crossover).
 Ordered Crossover defines a subset of the first parent's genes and fills the rest of the child with the second parent's genes.  
 ```[1, 2, 3, 4, 5]``` and ```[5, 4, 3, 2, 1]``` -> ```[1, 4, 3, 2, 5]``` where the subset is ```[4, 3, 2]```  
-I will implement PMX (Partially Mapped Crossover) in the future.  
+Partially Matched Crossover defines a mapping between the parents as described in the image below.
+![img.png](img.png)  
 **Selection** - this operator selects the solutions from the population as parents for the crossover (and effectively next generation). This project uses tournament selection.
 Tournament selection works by selecting a random subset of solutions from the population and then selecting the best solution from this subset. It's important to tune this operator parameters - too strict selection may lead to algorithm getting stuck in the local optimum, while too loose selection may lead to the algorithm not converging at all.
 I will implement roulette wheel selection in the future.
