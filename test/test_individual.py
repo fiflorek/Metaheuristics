@@ -1,33 +1,53 @@
 from unittest import TestCase
 from unittest.mock import patch
-from problem import individual
-from problem.individual import Individual
+import src.problem.individual as individual
+from src.problem.individual import Individual
 
 
 class TestIndividual(TestCase):
 
-    @patch('individual.generate_two_random_indexes')
+    @patch('src.problem.individual.generate_two_random_indexes')
     def test_ordered_cross(self, mock):
         parent_a = [i for i in range(1, 10)]
         parent_b = [5, 7, 4, 9, 1, 3, 6, 2, 8]
         child = [7, 9, 3, 4, 5, 6, 1, 2, 8]
         mock.return_value = (2, 5)
 
-        self.assertEqual(child, individual.cross(parent_a, parent_b))
+        self.assertEqual(child, individual.cross_ox(parent_a, parent_b))
 
-    @patch('individual.generate_two_random_indexes')
+    @patch('src.problem.individual.generate_two_random_indexes')
+    def test_pmx_crossover(self, mock):
+        parent_a = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+        parent_b = [5, 7, 4, 9, 1, 3, 6, 2, 8]
+        child_a = [5, 2, 4, 3, 1, 6, 7, 8, 9]
+        child_b = [1, 7, 3, 9, 5, 4, 6, 2, 8]
+        mock.return_value = (2, 5)
+
+        self.assertEqual((child_b, child_a), individual.cross_pmx(parent_a, parent_b))
+
+    @patch('src.problem.individual.generate_two_random_indexes')
+    def test_pmx_crossover_b(self, mock):
+        parent_a = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+        parent_b = [4, 3, 1, 2, 8, 7, 5, 6, 9]
+        child_a = [1, 4, 3, 2, 8, 7, 6, 5, 9]
+        child_b = [2, 3, 1, 4, 5, 6, 8, 7, 9]
+        mock.return_value = (3, 5)
+
+        self.assertEqual((child_b, child_a), individual.cross_pmx(parent_a, parent_b))
+
+    @patch('src.problem.individual.generate_two_random_indexes')
     def test_mutate_by_swap(self, mock):
         genotype = [5, 6, 7, 1, 2, 3, 4]
         mock.return_value = (1, 5)
-        individual.mutate_by_swap(genotype)
+        individual.mutate_swap(genotype)
 
         self.assertEqual(genotype, [5, 3, 7, 1, 2, 6, 4])
 
-    @patch('individual.generate_two_random_indexes')
+    @patch('src.problem.individual.generate_two_random_indexes')
     def test_mutate_by_inversion(self, mock):
         genotype = [5, 6, 7, 1, 2, 3, 4]
         mock.return_value = (1, 5)
-        individual.mutate_by_inversion(genotype)
+        individual.mutate_inversion(genotype)
 
         self.assertEqual(genotype, [5, 3, 2, 1, 7, 6, 4])
 
@@ -44,7 +64,7 @@ class TestIndividual(TestCase):
         individual.swap(lst, 1, 3)
         self.assertEqual(lst, [1, 4, 3, 2, 5])
 
-    @patch('individual.cost')
+    @patch('src.problem.individual.cost')
     def test_evaluate(self, mock):
         cvrp = object()
         mock.return_value = 10.0

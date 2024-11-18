@@ -1,9 +1,10 @@
 problem_instance: "A-n32-k5"
 no_of_runs: 1
-algorithm: "greedy"
+algorithm: "genetic"
 population_size: 10
 generations: 50
 crossover_probability: 0.6
+crossover_type: 'ox'
 mutation_probability: 0.2
-mutation_type: 'swap'
+mutation_type: 'inversion'
 tournament_size: 6
