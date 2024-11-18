@@ -16,7 +16,7 @@ class TestIndividual(TestCase):
         self.assertEqual(child, individual.cross_ox(parent_a, parent_b))
 
     @patch('src.problem.individual.generate_two_random_indexes')
-    def test_pmx_crossover(self, mock):
+    def test_pmx_crossover_skip_mapping(self, mock):
         parent_a = [1, 2, 3, 4, 5, 6, 7, 8, 9]
         parent_b = [5, 7, 4, 9, 1, 3, 6, 2, 8]
         child_a = [5, 2, 4, 3, 1, 6, 7, 8, 9]
@@ -26,7 +26,7 @@ class TestIndividual(TestCase):
         self.assertEqual((child_b, child_a), individual.cross_pmx(parent_a, parent_b))
 
     @patch('src.problem.individual.generate_two_random_indexes')
-    def test_pmx_crossover_b(self, mock):
+    def test_pmx_crossover_full_mapping(self, mock):
         parent_a = [1, 2, 3, 4, 5, 6, 7, 8, 9]
         parent_b = [4, 3, 1, 2, 8, 7, 5, 6, 9]
         child_a = [1, 4, 3, 2, 8, 7, 6, 5, 9]
