@@ -3,6 +3,7 @@ no_of_runs: 1
 algorithm: "genetic"
 population_size: 10
 generations: 50
+init_type: 'greedy'
 crossover_probability: 0.6
 crossover_type: 'ox'
 mutation_probability: 0.2

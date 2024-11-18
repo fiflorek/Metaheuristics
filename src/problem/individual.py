@@ -21,7 +21,7 @@ class Individual:
 
 
 def cross(parent_a: list[int], parent_b: list[int], crossover_type: Crossover) -> tuple[list[int], list[int]]:
-    if crossover_type.OX:
+    if crossover_type == Crossover.OX:
         return cross_ox(parent_a, parent_b), cross_ox(parent_b, parent_a)
     else:
         return cross_pmx(parent_a, parent_b)
@@ -63,7 +63,7 @@ def cross_pmx(parent_a: list[int], parent_b: list[int]) -> tuple[list[int], list
 
 
 def mutate(individual: list[int], mutation_type: Mutation) -> list[int]:
-    if mutation_type.SWAP:
+    if mutation_type == Mutation.SWAP:
         return mutate_swap(individual)
     else:
         return mutate_inversion(individual)

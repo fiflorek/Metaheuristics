@@ -21,6 +21,11 @@ class Selection(Enum):
     TOURNAMENT = 'tournament'
 
 
+class Initialization(Enum):
+    RANDOM = 'random'
+    GREEDY = 'greedy'
+
+
 class Crossover(Enum):
     PMX = 'pmx'
     OX = 'ox'
