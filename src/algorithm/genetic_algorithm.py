@@ -69,10 +69,6 @@ class GeneticAlgorithm(Algorithm):
     def mutation_probability(self):
         return self.config.mutation_probability
 
-    @property
-    def mutation_type(self):
-        return self.config.mutation_type
-
     def selection(self, population: list[Individual]) -> Individual:
         tournament = []
         for i in range(self.tournament_size):

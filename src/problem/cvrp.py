@@ -42,6 +42,8 @@ def distance(city_a: City, city_b: City) -> float:
 
 
 # this function needs to be refactored - take into account when truck is ie. 80% empty - maybe then turn back instead of going to depot only when its empty
+# i would like to make a check, if let's say truck has enough capacity for only one more city: is it better to go back now and refill later, or go to the next city and then go back to depot
+# which basically is checking if city_a -> depot -> city_b < depot -> city_a -> city_b
 def cost(cvrp: Cvrp, route: list[int]) -> float:
     # first step is from depot to first city
     depot_city_number = cvrp.depot_number

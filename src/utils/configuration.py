@@ -16,6 +16,8 @@ class Config:
         self.mutation_type = Mutation(config_dict.get("mutation_type"))
         self.tournament_size = config_dict.get("tournament_size")
         self.init_type = Initialization(config_dict.get("init_type"))
+        self.neighbourhood_size = config_dict.get("neighbourhood_size")
+        self.tabu_list_size = config_dict.get("tabu_list_size")
 
     def __str__(self):
         return f"problem_instance: {self.problem_instance}, no_of_runs: {self.no_of_runs}, algorithm: {self.algorithm}, " \
