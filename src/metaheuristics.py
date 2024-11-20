@@ -9,6 +9,7 @@ from algorithm.genetic_algorithm import GeneticAlgorithm
 from algorithm.greedy_algorithm import GreedyAlgorithm
 from algorithm.random_algorithm import RandomAlgorithm
 from algorithm.result import Result
+from algorithm.tabu_search import TabuSearch
 from problem.cvrp import Cvrp
 from utils.configuration import Config
 from utils.enums import AlgorithmName
@@ -20,7 +21,8 @@ def solve_problem(cvrp: Cvrp, config: Config) -> None:
         AlgorithmName.GENETIC: GeneticAlgorithm(cvrp, config).solve,
         AlgorithmName.RANDOM: RandomAlgorithm(cvrp, config).solve,
         AlgorithmName.GREEDY: GreedyAlgorithm(cvrp, config).solve,
-        AlgorithmName.ANNEALING: solve_cvrp_annealing
+        AlgorithmName.ANNEALING: solve_cvrp_annealing,
+        AlgorithmName.TABU_SEARCH: TabuSearch(cvrp, config).solve
     }
 
     selected_algorithm = algorithm_mapping.get(config.algorithm)
