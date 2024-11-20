@@ -9,6 +9,7 @@ from cvrp_metaheuristics.algorithm.genetic_algorithm import GeneticAlgorithm
 from cvrp_metaheuristics.algorithm.greedy_algorithm import GreedyAlgorithm
 from cvrp_metaheuristics.algorithm.random_algorithm import RandomAlgorithm
 from cvrp_metaheuristics.algorithm.result import Result
+from cvrp_metaheuristics.algorithm.tabu_search import TabuSearch
 from cvrp_metaheuristics.problem.cvrp import Cvrp
 from cvrp_metaheuristics.utils.configuration import Config
 from cvrp_metaheuristics.utils.enums import AlgorithmName
@@ -20,6 +21,7 @@ def solve_problem(cvrp: Cvrp, config: Config) -> None:
         AlgorithmName.GENETIC: GeneticAlgorithm(cvrp, config).solve,
         AlgorithmName.RANDOM: RandomAlgorithm(cvrp, config).solve,
         AlgorithmName.GREEDY: GreedyAlgorithm(cvrp, config).solve,
+        AlgorithmName.TABU_SEARCH: TabuSearch(cvrp, config).solve
     }
 
     selected_algorithm = algorithm_mapping.get(config.algorithm)
