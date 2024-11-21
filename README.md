@@ -29,15 +29,12 @@ tournament_size: 6
 ___
 ```yaml
 problem_instance: "A-n32-k5"
-no_of_runs: 1
 algorithm: "random"
-population_size: 10
-generations: 50
+no_of_solutions: 1000
 ```
 ___
 ```yaml
 problem_instance: "A-n32-k5"
-no_of_runs: 1
 algorithm: "greedy"
 ```
 ## Setup and Run
