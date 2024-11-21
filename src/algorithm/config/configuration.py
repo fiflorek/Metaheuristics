@@ -12,4 +12,4 @@ class Config:
         self.algorithm = AlgorithmName(config_dict.get("algorithm", "greedy"))
 
     def __str__(self):
-        return f"Problem instance: {self.problem_instance}, Algorithm: {self.algorithm}"
+        return f"Problem instance: {self.problem_instance}\n, Algorithm: {self.algorithm}\n"

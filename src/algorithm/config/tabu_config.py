@@ -21,7 +21,6 @@ class TabuSearchConfig(Config):
         self._mutation_type = Mutation(config_dict.get("mutation_type", "swap"))
         self._generations = config_dict.get("generations", 10)
 
-
     @property
     def no_of_runs(self) -> int:
         return self._no_of_runs
@@ -45,3 +44,11 @@ class TabuSearchConfig(Config):
     @property
     def generations(self) -> int:
         return self._generations
+
+    def __str__(self):
+        return super().__str__() + f"Neighbourhood size: {self.neighbourhood_size}\n" \
+                                   f"Tabu list size: {self.tabu_list_size}\n" \
+                                   f"Mutation type: {self.mutation_type}\n" \
+                                   f"Generations: {self.generations}\n" \
+                                   f"Initialization type: {self.init_type}\n" \
+                                   f"Number of runs: {self.no_of_runs}\n"

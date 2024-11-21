@@ -8,24 +8,24 @@
 #no_of_solutions: 100
 
 #GENETIC
-problem_instance: "A-n32-k5"
-no_of_runs: 1
-algorithm: "genetic"
-population_size: 10
-generations: 50
-init_type: 'greedy'
-crossover_probability: 0.6
-crossover_type: 'ox'
-mutation_probability: 0.2
-mutation_type: 'inversion'
-tournament_size: 6
-
-#TABU_SEARCH
 #problem_instance: "A-n32-k5"
 #no_of_runs: 1
-#algorithm: "tabu_search"
-#generations: 100
+#algorithm: "genetic"
+#population_size: 10
+#generations: 50
 #init_type: 'greedy'
-#neighbourhood_size: 500
-#tabu_list_size: 100
-#mutation_type: 'swap'
+#crossover_probability: 0.6
+#crossover_type: 'ox'
+#mutation_probability: 0.2
+#mutation_type: 'inversion'
+#tournament_size: 6
+
+#TABU_SEARCH
+problem_instance: "A-n32-k5"
+no_of_runs: 1
+algorithm: "tabu_search"
+generations: 100
+init_type: 'greedy'
+neighbourhood_size: 500
+tabu_list_size: 100
+mutation_type: 'swap'

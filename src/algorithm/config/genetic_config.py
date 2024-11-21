@@ -63,4 +63,13 @@ class GeneticConfig(Config):
     def tournament_size(self) -> int:
         return self._tournament_size
 
-
+    def __str__(self):
+        return super().__str__() + f"Population size: {self.population_size}\n" \
+                                   f"Generations: {self.generations}\n" \
+                                   f"Initialization type: {self.init_type}\n" \
+                                   f"Crossover probability: {self.crossover_probability}\n" \
+                                   f"Crossover type: {self.crossover_type}\n" \
+                                   f"Mutation probability: {self.mutation_probability}\n" \
+                                   f"Mutation type: {self.mutation_type}\n" \
+                                   f"Tournament size: {self.tournament_size}\n" \
+                                   f"Number of runs: {self.no_of_runs}\n"
