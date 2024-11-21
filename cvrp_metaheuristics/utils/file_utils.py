@@ -2,10 +2,17 @@ from datetime import datetime
 import os
 from pathlib import Path
 
+<<<<<<< HEAD:cvrp_metaheuristics/utils/file_utils.py
 from cvrp_metaheuristics.algorithm.result import Result
 from cvrp_metaheuristics.problem.cvrp import Cvrp, City
 from cvrp_metaheuristics.utils.configuration import Config
 from cvrp_metaheuristics.utils.enums import DataFileConstants as DFC
+=======
+from algorithm.result import Result
+from problem.cvrp import Cvrp, City
+from algorithm.config.configuration import Config
+from utils.enums import DataFileConstants as DFC
+>>>>>>> a8e3007 (config class hierarchy):src/utils/file_utils.py
 
 root_dir = Path(__file__).resolve().parents[2]
 

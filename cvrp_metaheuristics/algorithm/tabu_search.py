@@ -1,9 +1,10 @@
 import random
 from typing import Set
 
+from cvrp_metaheuristics.algorithm.config.tabu_config import TabuSearchConfig
 from cvrp_metaheuristics.algorithm.algorithm import Algorithm
 from cvrp_metaheuristics.algorithm.result import Result
-from cvrp_metaheuristics.utils.enums import Initialization
+from cvrp_metaheuristics.utils.enums import Initialization, Mutation
 from cvrp_metaheuristics.problem.individual import Individual, mutate
 from utils.init_methods import init_random_genotype, init_greedy_genotype
 
@@ -12,6 +13,7 @@ class TabuSearch(Algorithm):
     _current_best: Individual
     _tabu_set: Set[int]  # this set contains hashes of genotypes
     _tabu_list: list[int]  # this list contains hashes of genotypes - helps with removing the oldest element
+    config: TabuSearchConfig
 
     def _initialize_algorithm(self) -> None:
         self._tabu_set = set()
@@ -37,6 +39,18 @@ class TabuSearch(Algorithm):
     @property
     def tabu_list(self) -> list[int]:
         return self._tabu_list
+
+    @property
+    def init_type(self) -> Initialization:
+        return self.config.init_type
+
+    @property
+    def generations(self) -> int:
+        return self.config.generations
+
+    @property
+    def mutation_type(self) -> Mutation:
+        return self.config.mutation_type
 
     def solve(self) -> list[Result]:
         results = []

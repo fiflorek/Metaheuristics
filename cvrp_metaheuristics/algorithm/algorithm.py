@@ -47,20 +47,8 @@ class Algorithm(ABC):
         return self.cvrp.depot_number
 
     @property
-    def crossover_type(self) -> Crossover:
-        return self.config.crossover_type
-
-    @property
-    def init_type(self) -> Initialization:
-        return self.config.init_type
-
-    @property
     def result_list(self) -> list[Result]:
         return self._result_list
-
-    @property
-    def mutation_type(self):
-        return self.config.mutation_type
 
     @abstractmethod
     def _initialize_algorithm(self) -> None:
