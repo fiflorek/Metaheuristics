@@ -8,6 +8,7 @@ from problem.cvrp import Cvrp
 from problem.individual import Individual
 from utils.configuration import Config
 from utils.enums import Initialization
+from utils.init_methods import init_random_genotype, init_greedy_genotype
 
 
 class Population:
@@ -80,11 +81,10 @@ class GeneticAlgorithm(Algorithm):
         population = []
         if self.init_type == Initialization.RANDOM:
             for _ in range(self.population_size):
-                genotype = list(range(1, self.no_of_cities))
-                random.shuffle(genotype)
+                genotype = init_random_genotype(self.cvrp)
                 population.append(Individual(genotype))
         else:
-            genotype = GreedyAlgorithm(self.cvrp, self.config).solve()[0].best_genotype
+            genotype = init_greedy_genotype(self.cvrp, self.config)
             for _ in range(self.population_size):
                 population.append(Individual(genotype))
 

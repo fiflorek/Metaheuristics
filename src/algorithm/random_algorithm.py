@@ -5,6 +5,7 @@ from algorithm.algorithm import Algorithm
 from algorithm.result import Result
 from problem.cvrp import cost, Cvrp
 from utils.configuration import Config
+from utils.init_methods import init_random_genotype
 
 
 class RandomAlgorithm(Algorithm):
@@ -33,8 +34,7 @@ class RandomAlgorithm(Algorithm):
         return self.result_list
 
     def generate_random_solution(self) -> list[int]:
-        city_ids = list(range(1, self.no_of_cities))
-        return random.sample(city_ids, len(city_ids))
+        return init_random_genotype(self.cvrp)
 
 
 

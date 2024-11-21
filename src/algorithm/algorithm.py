@@ -8,7 +8,7 @@ from utils.enums import Crossover, Initialization
 
 class Algorithm(ABC):
     """Base class for algorithms."""
-    _cvrp: Cvrp
+    _cvrp: Cvrp  # problem that the algorithm is trying to solve
     _config: Config
     _result_list: list[Result]
 
