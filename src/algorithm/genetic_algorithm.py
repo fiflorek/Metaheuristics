@@ -1,13 +1,12 @@
 import random
 
-from algorithm.greedy_algorithm import GreedyAlgorithm
 from algorithm.algorithm import Algorithm
+from algorithm.config.genetic_config import GeneticConfig
 from algorithm.result import Result
 from problem import individual
 from problem.cvrp import Cvrp
 from problem.individual import Individual
-from utils.configuration import Config
-from utils.enums import Initialization
+from utils.enums import Initialization, Crossover, Mutation
 from utils.init_methods import init_random_genotype, init_greedy_genotype
 
 
@@ -34,6 +33,7 @@ class GeneticAlgorithm(Algorithm):
 
     _current_population: Population
     _current_best: Individual
+    config: GeneticConfig
 
     def _initialize_algorithm(self) -> None:
         self.initialize_population()
@@ -69,6 +69,26 @@ class GeneticAlgorithm(Algorithm):
     @property
     def mutation_probability(self):
         return self.config.mutation_probability
+
+    @property
+    def init_type(self) -> Initialization:
+        return self.config.init_type
+
+    @property
+    def population_size(self) -> int:
+        return self.config.population_size
+
+    @property
+    def generations(self) -> int:
+        return self.config.generations
+
+    @property
+    def crossover_type(self) -> Crossover:
+        return self.config.crossover_type
+
+    @property
+    def mutation_type(self) -> Mutation:
+        return self.config.mutation_type
 
     def selection(self, population: list[Individual]) -> Individual:
         tournament = []

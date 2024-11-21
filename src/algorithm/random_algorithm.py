@@ -1,20 +1,21 @@
-import random
 import sys
 
 from algorithm.algorithm import Algorithm
+from algorithm.config.random_config import RandomConfig
 from algorithm.result import Result
-from problem.cvrp import cost, Cvrp
-from utils.configuration import Config
+from problem.cvrp import cost
 from utils.init_methods import init_random_genotype
 
 
 class RandomAlgorithm(Algorithm):
 
+    config: RandomConfig
+
     def _initialize_algorithm(self) -> None:
         pass
 
     def solve(self) -> list[Result]:
-        no_of_solutions = self.config.population_size * self.config.generations
+        no_of_solutions = self.config.no_of_solutions
         best = sys.maxsize
         best_genotype = []
         average = 0

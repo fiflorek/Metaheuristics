@@ -4,7 +4,7 @@ from pathlib import Path
 
 from algorithm.result import Result
 from problem.cvrp import Cvrp, City
-from utils.configuration import Config
+from algorithm.config.configuration import Config
 from utils.enums import DataFileConstants as DFC
 
 root_dir = Path(__file__).resolve().parents[2]
