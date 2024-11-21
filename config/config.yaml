@@ -13,7 +13,7 @@
 problem_instance: "A-n32-k5"
 no_of_runs: 1
 algorithm: "tabu_search"
-generations: 50
+generations: 100
 init_type: 'greedy'
-neighbourhood_size: 5
-tabu_list_size: 10
+neighbourhood_size: 500
+tabu_list_size: 100
