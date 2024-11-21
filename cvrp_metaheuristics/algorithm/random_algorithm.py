@@ -1,9 +1,17 @@
 import random
 import sys
 
+<<<<<<< HEAD:cvrp_metaheuristics/algorithm/random_algorithm.py
 from cvrp_metaheuristics.algorithm.algorithm import Algorithm
 from cvrp_metaheuristics.algorithm.result import Result
 from cvrp_metaheuristics.problem.cvrp import cost
+=======
+from algorithm.algorithm import Algorithm
+from algorithm.result import Result
+from problem.cvrp import cost, Cvrp
+from utils.configuration import Config
+from utils.init_methods import init_random_genotype
+>>>>>>> 4eda22e (standarize init methods):src/algorithm/random_algorithm.py
 
 
 class RandomAlgorithm(Algorithm):
@@ -30,5 +38,13 @@ class RandomAlgorithm(Algorithm):
         return self.result_list
 
     def generate_random_solution(self) -> list[int]:
+<<<<<<< HEAD:cvrp_metaheuristics/algorithm/random_algorithm.py
         city_ids = list(range(1, self.no_of_cities))
         return random.sample(city_ids, len(city_ids))
+=======
+        return init_random_genotype(self.cvrp)
+
+
+
+
+>>>>>>> 4eda22e (standarize init methods):src/algorithm/random_algorithm.py

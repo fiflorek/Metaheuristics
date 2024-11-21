@@ -2,10 +2,10 @@ import random
 from typing import Set
 
 from cvrp_metaheuristics.algorithm.algorithm import Algorithm
-from cvrp_metaheuristics.algorithm.greedy_algorithm import GreedyAlgorithm
 from cvrp_metaheuristics.algorithm.result import Result
 from cvrp_metaheuristics.utils.enums import Initialization
 from cvrp_metaheuristics.problem.individual import Individual, mutate
+from utils.init_methods import init_random_genotype, init_greedy_genotype
 
 
 class TabuSearch(Algorithm):
@@ -56,10 +56,9 @@ class TabuSearch(Algorithm):
 
     def init_individual(self) -> None:
         if self.config.init_type == Initialization.RANDOM:
-            genotype = list(range(1, self.no_of_cities))
-            random.shuffle(genotype)
+            genotype = init_random_genotype(self.cvrp)
         else:
-            genotype = GreedyAlgorithm(self.cvrp, self.config).solve()[0].best_genotype
+            genotype = init_greedy_genotype(self.cvrp, self.config)
         self.current_best = Individual(genotype)
         self.current_best.evaluate(self.cvrp)
 
@@ -93,8 +92,7 @@ class TabuSearch(Algorithm):
             self.tabu_set.remove(self.tabu_list.pop(0))
 
     def change_neighbourhood(self) -> Individual:
-        genotype = list(range(1, self.no_of_cities))
-        random.shuffle(genotype)
+        genotype = init_random_genotype(self.cvrp)
         while hash(tuple(genotype)) in self.tabu_set:
             random.shuffle(genotype)
         i = Individual(genotype)
