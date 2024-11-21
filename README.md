@@ -81,4 +81,4 @@ I will implement roulette wheel selection in the future.
 ### Simulated Annealing
 Not implemented yet
 ### Tabu Search
-Not implemented yet
+Tabu Search is an iterative neighborhood search algorithm, where the neighborhood changes dynamically. Tabu search enhances local search by avoiding points in the search space which are already visited. By avoiding already visited points, loops in search space are avoided and local optima can be escaped. 
