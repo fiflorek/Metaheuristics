@@ -1,7 +1,7 @@
 import sys
 
-from algorithm.result import Result
-from problem.cvrp import cost
+from src.algorithm.result import Result
+from src.problem.cvrp import cost
 
 from src.algorithm.algorithm import Algorithm
 

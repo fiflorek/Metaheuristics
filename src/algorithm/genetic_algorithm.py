@@ -1,13 +1,12 @@
 import random
 
-from algorithm.greedy_algorithm import GreedyAlgorithm
-from algorithm.algorithm import Algorithm
-from algorithm.result import Result
-from problem import individual
-from problem.cvrp import Cvrp
-from problem.individual import Individual
-from utils.configuration import Config
-from utils.enums import Initialization
+from src.algorithm.greedy_algorithm import GreedyAlgorithm
+from src.algorithm.algorithm import Algorithm
+from src.algorithm.result import Result
+from src.problem import individual
+from src.problem.cvrp import Cvrp
+from src.problem.individual import Individual
+from src.utils.enums import Initialization
 
 
 class Population:

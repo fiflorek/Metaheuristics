@@ -2,10 +2,10 @@ from datetime import datetime
 import os
 from pathlib import Path
 
-from algorithm.result import Result
-from problem.cvrp import Cvrp, City
-from utils.configuration import Config
-from utils.enums import DataFileConstants as DFC
+from src.algorithm.result import Result
+from src.problem.cvrp import Cvrp, City
+from src.utils.configuration import Config
+from src.utils.enums import DataFileConstants as DFC
 
 root_dir = Path(__file__).resolve().parents[2]
 

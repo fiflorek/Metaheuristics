@@ -1,6 +1,6 @@
 from typing import Any, Dict
 
-from utils.enums import AlgorithmName, Crossover, Mutation, Initialization
+from src.utils.enums import AlgorithmName, Crossover, Mutation, Initialization
 
 
 class Config:

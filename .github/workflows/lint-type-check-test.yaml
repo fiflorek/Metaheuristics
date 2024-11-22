@@ -42,6 +42,7 @@ jobs:
       - name: Lint with flake8
         uses: py-actions/flake8@v2.3.0
         with:
+          max-line-length: 127
           path: src
   mypy:
     runs-on: ubuntu-latest

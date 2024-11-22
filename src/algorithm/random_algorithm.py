@@ -1,10 +1,9 @@
 import random
 import sys
 
-from algorithm.algorithm import Algorithm
-from algorithm.result import Result
-from problem.cvrp import cost, Cvrp
-from utils.configuration import Config
+from src.algorithm.algorithm import Algorithm
+from src.algorithm.result import Result
+from src.problem.cvrp import cost
 
 
 class RandomAlgorithm(Algorithm):

@@ -4,19 +4,15 @@ from pathlib import Path
 
 import yaml
 
-# Add parent directory to sys.path to import modules from src
-parent_dir = Path(__file__).resolve().parents[1]
-sys.path.append(str(parent_dir))
-
-from algorithm.annealing_algorithm import solve_cvrp_annealing
-from algorithm.genetic_algorithm import GeneticAlgorithm
-from algorithm.greedy_algorithm import GreedyAlgorithm
-from algorithm.random_algorithm import RandomAlgorithm
-from algorithm.result import Result
-from problem.cvrp import Cvrp
-from utils.configuration import Config
-from utils.enums import AlgorithmName
-from utils.file_utils import save_results_to_file, save_best_run_to_file, read_problem
+from src.algorithm.annealing_algorithm import solve_cvrp_annealing
+from src.algorithm.genetic_algorithm import GeneticAlgorithm
+from src.algorithm.greedy_algorithm import GreedyAlgorithm
+from src.algorithm.random_algorithm import RandomAlgorithm
+from src.algorithm.result import Result
+from src.problem.cvrp import Cvrp
+from src.utils.configuration import Config
+from src.utils.enums import AlgorithmName
+from src.utils.file_utils import save_results_to_file, save_best_run_to_file, read_problem
 
 
 def solve_problem(cvrp: Cvrp, config: Config) -> None:
@@ -69,7 +65,7 @@ def solve_problem(cvrp: Cvrp, config: Config) -> None:
 
 
 def main():
-    root_dir = Path(__file__).resolve().parents[1]
+    root_dir = Path(__file__).resolve().parent
     config_file_path = root_dir / "config/config.yaml"
     data_set_dir = root_dir / "resources/data_set/A"
 

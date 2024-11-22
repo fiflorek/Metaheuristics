@@ -3,7 +3,7 @@ from abc import abstractmethod, ABC
 from src.algorithm.result import Result
 from src.problem.cvrp import Cvrp
 from src.utils.configuration import Config
-from utils.enums import Crossover, Initialization
+from src.utils.enums import Crossover, Initialization
 
 
 class Algorithm(ABC):
