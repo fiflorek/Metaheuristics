@@ -4,6 +4,10 @@ from pathlib import Path
 
 import yaml
 
+# Add parent directory to sys.path to import modules from src
+parent_dir = Path(__file__).resolve().parents[1]
+sys.path.append(str(parent_dir))
+
 from algorithm.annealing_algorithm import solve_cvrp_annealing
 from algorithm.genetic_algorithm import GeneticAlgorithm
 from algorithm.greedy_algorithm import GreedyAlgorithm
