@@ -5,7 +5,6 @@ from typing import Callable, Dict
 
 import yaml
 
-from cvrp_metaheuristics.algorithm.annealing_algorithm import solve_cvrp_annealing
 from cvrp_metaheuristics.algorithm.genetic_algorithm import GeneticAlgorithm
 from cvrp_metaheuristics.algorithm.greedy_algorithm import GreedyAlgorithm
 from cvrp_metaheuristics.algorithm.random_algorithm import RandomAlgorithm
