@@ -16,10 +16,8 @@ class RandomAlgorithm(Algorithm):
         best = sys.float_info.max
         best_genotype = []
         average = 0.0
-        solutions = []
         for _ in range(no_of_solutions):
             solution = self.generate_random_solution()
-            solutions.append(solution)
             solution_cost = cost(self.cvrp, solution)
             if solution_cost < best:
                 best = solution_cost
