@@ -48,10 +48,12 @@ algorithm: "greedy"
 `source venv/bin/activate`
 3. Install requirements  
 `pip install -r requirements.txt`
-4. (e is for editable, otherwise omit):
+4. (Dev only) Install the pre-commit hooks:
+`cp ./git-hooks/pre-commit ./.git/hooks/pre-commit`  
+5. Install ala (e is for editable, otherwise omit):
 `pip install -e .`
-5. Configure algorithm parameters in config.yaml
-6. Run the program  
+6. Configure algorithm parameters in config.yaml
+7. Run the program  
 `python cvpr_metahueristics/metaheuristics.py`
 The results are saved in the "results" directory relative to where the script is run from.)
 
