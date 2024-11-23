@@ -11,6 +11,7 @@ permissions:
 
 jobs:
   pytest:
+    name: Test with pytest
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -29,6 +30,7 @@ jobs:
         run: |
           pytest test
   flake8:
+    name: Lint with flake8
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -45,6 +47,7 @@ jobs:
           max-line-length: 127
           path: cvrp_metaheuristics
   mypy:
+    name: Type-check with mypy
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
