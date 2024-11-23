@@ -1,11 +1,12 @@
 import random
+from typing import Dict
 
 from cvrp_metaheuristics.problem.cvrp import cost, Cvrp
 from cvrp_metaheuristics.utils.enums import Crossover, Mutation
 
 
 class Individual:
-    fitness_cache = {}
+    fitness_cache: Dict[int, float] = {}
 
     def __init__(self, genotype: list[int], fitness=0.0):
         self.genotype = genotype

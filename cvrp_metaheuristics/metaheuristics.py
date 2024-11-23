@@ -1,6 +1,7 @@
 import sys
 import time
 from pathlib import Path
+from typing import Callable, Dict
 
 import yaml
 
@@ -16,11 +17,10 @@ from cvrp_metaheuristics.utils.file_utils import save_results_to_file, save_best
 
 
 def solve_problem(cvrp: Cvrp, config: Config) -> None:
-    algorithm_mapping = {
+    algorithm_mapping: Dict[AlgorithmName, Callable[[], list[Result]]] = {
         AlgorithmName.GENETIC: GeneticAlgorithm(cvrp, config).solve,
         AlgorithmName.RANDOM: RandomAlgorithm(cvrp, config).solve,
         AlgorithmName.GREEDY: GreedyAlgorithm(cvrp, config).solve,
-        AlgorithmName.ANNEALING: solve_cvrp_annealing
     }
 
     selected_algorithm = algorithm_mapping.get(config.algorithm)
@@ -28,8 +28,8 @@ def solve_problem(cvrp: Cvrp, config: Config) -> None:
     if selected_algorithm:
         start_time = time.time()
         if config.algorithm.is_metaheuristic():
-            global_best = sys.maxsize
-            global_avg = 0
+            global_best = sys.float_info.max
+            global_avg = 0.0
             global_best_genotype = []
             global_best_run = []
             for i in range(config.no_of_runs):

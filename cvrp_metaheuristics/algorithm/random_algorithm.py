@@ -13,9 +13,9 @@ class RandomAlgorithm(Algorithm):
 
     def solve(self) -> list[Result]:
         no_of_solutions = self.config.population_size * self.config.generations
-        best = sys.maxsize
+        best = sys.float_info.max
         best_genotype = []
-        average = 0
+        average = 0.0
         solutions = []
         for _ in range(no_of_solutions):
             solution = self.generate_random_solution()

@@ -96,7 +96,7 @@ class GeneticAlgorithm(Algorithm):
     def solve(self) -> list[Result]:
 
         for i in range(1, self.generations):
-            new_population = []
+            new_population: list[Individual] = []
             while len(new_population) < self.population_size:
                 parent_a = self.selection(self.current_population.population)
                 parent_b = self.selection(self.current_population.population)

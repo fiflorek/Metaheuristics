@@ -35,7 +35,7 @@ class Algorithm(ABC):
         return self.config.generations
 
     @property
-    def distances_matrix(self) -> list[list[int]]:
+    def distances_matrix(self) -> list[list[float]]:
         return self.cvrp.distances_matrix
 
     @property

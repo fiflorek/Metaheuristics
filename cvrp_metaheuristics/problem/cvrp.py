@@ -20,7 +20,7 @@ class Cvrp:
         self.distances_matrix = self._init_distances_matrix()
 
     def _init_distances_matrix(self) -> list[list[float]]:
-        matrix = [[0 for _ in range(self.no_of_cities)] for _ in range(self.no_of_cities)]
+        matrix = [[0.0 for _ in range(self.no_of_cities)] for _ in range(self.no_of_cities)]
         for i, row in enumerate(matrix):
             for j, element in enumerate(row):
                 matrix[i][j] = distance(self.cities[i], self.cities[j])

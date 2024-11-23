@@ -1,4 +1,5 @@
 import sys
+from typing import Dict
 
 from cvrp_metaheuristics.algorithm.result import Result
 from cvrp_metaheuristics.problem.cvrp import cost
@@ -8,12 +9,12 @@ from cvrp_metaheuristics.algorithm.algorithm import Algorithm
 
 class GreedyAlgorithm(Algorithm):
     _current_city: int
-    _visited_cities: dict[int, int]
+    _visited_cities: Dict[int, int]
 
     def _initialize_algorithm(self) -> None:
         # city_id, visit_sequence pair
         self._visited_cities = {}
-        self._solution = []
+        self._solution: list[int] = []
         self.visit_city(0, 0)
 
     @property
