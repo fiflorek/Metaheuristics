@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from src.problem.cvrp import City, Cvrp
+from cvpr_metaheuristics.problem.cvrp import City, Cvrp
 
 
 class TestRandomAlgorithm(TestCase):

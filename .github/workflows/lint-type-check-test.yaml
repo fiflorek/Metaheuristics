@@ -43,7 +43,7 @@ jobs:
         uses: py-actions/flake8@v2.3.0
         with:
           max-line-length: 127
-          path: src
+          path: cvpr_metaheuristics
   mypy:
     runs-on: ubuntu-latest
     steps:
@@ -55,4 +55,4 @@ jobs:
         uses: jpetrucciani/mypy-check@1.10.0
         with:
           requirements_file: requirements-dev.txt
-          path: src
+          path: cvpr_metaheuristics

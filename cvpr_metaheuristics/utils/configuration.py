@@ -1,6 +1,6 @@
 from typing import Any, Dict
 
-from src.utils.enums import AlgorithmName, Crossover, Mutation, Initialization
+from cvpr_metaheuristics.utils.enums import AlgorithmName, Crossover, Mutation, Initialization
 
 
 class Config:

@@ -1,9 +1,9 @@
 import sys
 
-from src.algorithm.result import Result
-from src.problem.cvrp import cost
+from cvpr_metaheuristics.algorithm.result import Result
+from cvpr_metaheuristics.problem.cvrp import cost
 
-from src.algorithm.algorithm import Algorithm
+from cvpr_metaheuristics.algorithm.algorithm import Algorithm
 
 
 class GreedyAlgorithm(Algorithm):

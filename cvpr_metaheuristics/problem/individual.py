@@ -1,7 +1,7 @@
 import random
 
-from src.problem.cvrp import cost, Cvrp
-from src.utils.enums import Crossover, Mutation
+from cvpr_metaheuristics.problem.cvrp import cost, Cvrp
+from cvpr_metaheuristics.utils.enums import Crossover, Mutation
 
 
 class Individual:

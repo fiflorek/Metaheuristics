@@ -1,9 +1,9 @@
 from abc import abstractmethod, ABC
 
-from src.algorithm.result import Result
-from src.problem.cvrp import Cvrp
-from src.utils.configuration import Config
-from src.utils.enums import Crossover, Initialization
+from cvpr_metaheuristics.algorithm.result import Result
+from cvpr_metaheuristics.problem.cvrp import Cvrp
+from cvpr_metaheuristics.utils.configuration import Config
+from cvpr_metaheuristics.utils.enums import Crossover, Initialization
 
 
 class Algorithm(ABC):
