@@ -1,9 +1,9 @@
 import random
 import sys
 
-from cvpr_metaheuristics.algorithm.algorithm import Algorithm
-from cvpr_metaheuristics.algorithm.result import Result
-from cvpr_metaheuristics.problem.cvrp import cost
+from cvrp_metaheuristics.algorithm.algorithm import Algorithm
+from cvrp_metaheuristics.algorithm.result import Result
+from cvrp_metaheuristics.problem.cvrp import cost
 
 
 class RandomAlgorithm(Algorithm):

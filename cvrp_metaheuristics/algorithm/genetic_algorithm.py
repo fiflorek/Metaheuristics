@@ -1,12 +1,12 @@
 import random
 
-from cvpr_metaheuristics.algorithm.greedy_algorithm import GreedyAlgorithm
-from cvpr_metaheuristics.algorithm.algorithm import Algorithm
-from cvpr_metaheuristics.algorithm.result import Result
-from cvpr_metaheuristics.problem import individual
-from cvpr_metaheuristics.problem.cvrp import Cvrp
-from cvpr_metaheuristics.problem.individual import Individual
-from cvpr_metaheuristics.utils.enums import Initialization
+from cvrp_metaheuristics.algorithm.greedy_algorithm import GreedyAlgorithm
+from cvrp_metaheuristics.algorithm.algorithm import Algorithm
+from cvrp_metaheuristics.algorithm.result import Result
+from cvrp_metaheuristics.problem import individual
+from cvrp_metaheuristics.problem.cvrp import Cvrp
+from cvrp_metaheuristics.problem.individual import Individual
+from cvrp_metaheuristics.utils.enums import Initialization
 
 
 class Population:

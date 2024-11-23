@@ -4,15 +4,15 @@ from pathlib import Path
 
 import yaml
 
-from cvpr_metaheuristics.algorithm.annealing_algorithm import solve_cvrp_annealing
-from cvpr_metaheuristics.algorithm.genetic_algorithm import GeneticAlgorithm
-from cvpr_metaheuristics.algorithm.greedy_algorithm import GreedyAlgorithm
-from cvpr_metaheuristics.algorithm.random_algorithm import RandomAlgorithm
-from cvpr_metaheuristics.algorithm.result import Result
-from cvpr_metaheuristics.problem.cvrp import Cvrp
-from cvpr_metaheuristics.utils.configuration import Config
-from cvpr_metaheuristics.utils.enums import AlgorithmName
-from cvpr_metaheuristics.utils.file_utils import save_results_to_file, save_best_run_to_file, read_problem
+from cvrp_metaheuristics.algorithm.annealing_algorithm import solve_cvrp_annealing
+from cvrp_metaheuristics.algorithm.genetic_algorithm import GeneticAlgorithm
+from cvrp_metaheuristics.algorithm.greedy_algorithm import GreedyAlgorithm
+from cvrp_metaheuristics.algorithm.random_algorithm import RandomAlgorithm
+from cvrp_metaheuristics.algorithm.result import Result
+from cvrp_metaheuristics.problem.cvrp import Cvrp
+from cvrp_metaheuristics.utils.configuration import Config
+from cvrp_metaheuristics.utils.enums import AlgorithmName
+from cvrp_metaheuristics.utils.file_utils import save_results_to_file, save_best_run_to_file, read_problem
 
 
 def solve_problem(cvrp: Cvrp, config: Config) -> None:
