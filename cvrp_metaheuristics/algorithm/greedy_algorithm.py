@@ -1,19 +1,20 @@
 import sys
+from typing import Dict
 
-from algorithm.result import Result
-from problem.cvrp import cost
+from cvrp_metaheuristics.algorithm.result import Result
+from cvrp_metaheuristics.problem.cvrp import cost
 
-from src.algorithm.algorithm import Algorithm
+from cvrp_metaheuristics.algorithm.algorithm import Algorithm
 
 
 class GreedyAlgorithm(Algorithm):
     _current_city: int
-    _visited_cities: dict[int, int]
+    _visited_cities: Dict[int, int]
 
     def _initialize_algorithm(self) -> None:
         # city_id, visit_sequence pair
         self._visited_cities = {}
-        self._solution = []
+        self._solution: list[int] = []
         self.visit_city(0, 0)
 
     @property
@@ -38,7 +39,8 @@ class GreedyAlgorithm(Algorithm):
         for i in range(1, self._cvrp.no_of_cities):
             self.visit_city(self.find_nearest_city_not_yet_visited(), i)
 
-        genotype = [city_id for city_id, visit_sequence in sorted(self.visited_cities.items(), key=lambda item: item[1])]
+        genotype = [city_id for city_id, visit_sequence in
+                    sorted(self.visited_cities.items(), key=lambda item: item[1])]
         best = average = cost(self.cvrp, genotype)
         # not including depot number in the solution (0)
         genotype.remove(self.depot_number)

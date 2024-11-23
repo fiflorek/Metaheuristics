@@ -1,13 +1,12 @@
 import random
 
-from algorithm.greedy_algorithm import GreedyAlgorithm
-from algorithm.algorithm import Algorithm
-from algorithm.result import Result
-from problem import individual
-from problem.cvrp import Cvrp
-from problem.individual import Individual
-from utils.configuration import Config
-from utils.enums import Initialization
+from cvrp_metaheuristics.algorithm.greedy_algorithm import GreedyAlgorithm
+from cvrp_metaheuristics.algorithm.algorithm import Algorithm
+from cvrp_metaheuristics.algorithm.result import Result
+from cvrp_metaheuristics.problem import individual
+from cvrp_metaheuristics.problem.cvrp import Cvrp
+from cvrp_metaheuristics.problem.individual import Individual
+from cvrp_metaheuristics.utils.enums import Initialization
 
 
 class Population:
@@ -30,7 +29,6 @@ class Population:
 
 
 class GeneticAlgorithm(Algorithm):
-
     _current_population: Population
     _current_best: Individual
 
@@ -39,7 +37,8 @@ class GeneticAlgorithm(Algorithm):
         self.current_population.evaluate(self.cvrp)
         self.current_best = self.current_population.best_individual()
         self.result_list.append(Result(self.current_best.fitness,
-                                       self.current_population.average_individual_fitness(), self.current_best.genotype))
+                                       self.current_population.average_individual_fitness(),
+                                       self.current_best.genotype))
 
     @property
     def current_population(self) -> Population:
@@ -97,14 +96,15 @@ class GeneticAlgorithm(Algorithm):
     def solve(self) -> list[Result]:
 
         for i in range(1, self.generations):
-            new_population = []
+            new_population: list[Individual] = []
             while len(new_population) < self.population_size:
                 parent_a = self.selection(self.current_population.population)
                 parent_b = self.selection(self.current_population.population)
                 child_a_genotype = parent_a.genotype[:]
                 child_b_genotype = parent_b.genotype[:]
                 if random.random() < self.crossover_probability:
-                    child_a_genotype, child_b_genotype = individual.cross(parent_a.genotype, parent_b.genotype, self.crossover_type)
+                    child_a_genotype, child_b_genotype = (
+                        individual.cross(parent_a.genotype, parent_b.genotype, self.crossover_type))
                 if random.random() < self.mutation_probability:
                     child_a_genotype = individual.mutate(child_a_genotype, self.mutation_type)
                     child_b_genotype = individual.mutate(child_b_genotype, self.mutation_type)
@@ -114,6 +114,7 @@ class GeneticAlgorithm(Algorithm):
             self.current_population.evaluate(self.cvrp)
             self.current_best = self.current_population.best_individual()
             self.result_list.append(Result(self.current_best.fitness,
-                                           round(self.current_population.average_individual_fitness(), 2), self.current_best.genotype))
+                                           round(self.current_population.average_individual_fitness(), 2),
+                                           self.current_best.genotype))
 
         return self.result_list

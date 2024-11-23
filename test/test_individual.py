@@ -1,12 +1,13 @@
 from unittest import TestCase
 from unittest.mock import patch
-import src.problem.individual as individual
-from src.problem.individual import Individual
+
+import cvrp_metaheuristics.problem.individual as individual
+from cvrp_metaheuristics.problem.individual import Individual
 
 
 class TestIndividual(TestCase):
 
-    @patch('src.problem.individual.generate_two_random_indexes')
+    @patch('cvrp_metaheuristics.problem.individual.generate_two_random_indexes')
     def test_ordered_cross(self, mock):
         parent_a = [i for i in range(1, 10)]
         parent_b = [5, 7, 4, 9, 1, 3, 6, 2, 8]
@@ -15,7 +16,7 @@ class TestIndividual(TestCase):
 
         self.assertEqual(child, individual.cross_ox(parent_a, parent_b))
 
-    @patch('src.problem.individual.generate_two_random_indexes')
+    @patch('cvrp_metaheuristics.problem.individual.generate_two_random_indexes')
     def test_pmx_crossover_skip_mapping(self, mock):
         parent_a = [1, 2, 3, 4, 5, 6, 7, 8, 9]
         parent_b = [5, 7, 4, 9, 1, 3, 6, 2, 8]
@@ -25,7 +26,7 @@ class TestIndividual(TestCase):
 
         self.assertEqual((child_b, child_a), individual.cross_pmx(parent_a, parent_b))
 
-    @patch('src.problem.individual.generate_two_random_indexes')
+    @patch('cvrp_metaheuristics.problem.individual.generate_two_random_indexes')
     def test_pmx_crossover_full_mapping(self, mock):
         parent_a = [1, 2, 3, 4, 5, 6, 7, 8, 9]
         parent_b = [4, 3, 1, 2, 8, 7, 5, 6, 9]
@@ -35,7 +36,7 @@ class TestIndividual(TestCase):
 
         self.assertEqual((child_b, child_a), individual.cross_pmx(parent_a, parent_b))
 
-    @patch('src.problem.individual.generate_two_random_indexes')
+    @patch('cvrp_metaheuristics.problem.individual.generate_two_random_indexes')
     def test_mutate_by_swap(self, mock):
         genotype = [5, 6, 7, 1, 2, 3, 4]
         mock.return_value = (1, 5)
@@ -43,7 +44,7 @@ class TestIndividual(TestCase):
 
         self.assertEqual(genotype, [5, 3, 7, 1, 2, 6, 4])
 
-    @patch('src.problem.individual.generate_two_random_indexes')
+    @patch('cvrp_metaheuristics.problem.individual.generate_two_random_indexes')
     def test_mutate_by_inversion(self, mock):
         genotype = [5, 6, 7, 1, 2, 3, 4]
         mock.return_value = (1, 5)
@@ -64,7 +65,7 @@ class TestIndividual(TestCase):
         individual.swap(lst, 1, 3)
         self.assertEqual(lst, [1, 4, 3, 2, 5])
 
-    @patch('src.problem.individual.cost')
+    @patch('cvrp_metaheuristics.problem.individual.cost')
     def test_evaluate(self, mock):
         cvrp = object()
         mock.return_value = 10.0

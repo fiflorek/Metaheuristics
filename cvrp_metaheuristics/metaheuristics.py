@@ -1,26 +1,25 @@
 import sys
 import time
 from pathlib import Path
+from typing import Callable, Dict
 
 import yaml
 
-from algorithm.annealing_algorithm import solve_cvrp_annealing
-from algorithm.genetic_algorithm import GeneticAlgorithm
-from algorithm.greedy_algorithm import GreedyAlgorithm
-from algorithm.random_algorithm import RandomAlgorithm
-from algorithm.result import Result
-from problem.cvrp import Cvrp
-from utils.configuration import Config
-from utils.enums import AlgorithmName
-from utils.file_utils import save_results_to_file, save_best_run_to_file, read_problem
+from cvrp_metaheuristics.algorithm.genetic_algorithm import GeneticAlgorithm
+from cvrp_metaheuristics.algorithm.greedy_algorithm import GreedyAlgorithm
+from cvrp_metaheuristics.algorithm.random_algorithm import RandomAlgorithm
+from cvrp_metaheuristics.algorithm.result import Result
+from cvrp_metaheuristics.problem.cvrp import Cvrp
+from cvrp_metaheuristics.utils.configuration import Config
+from cvrp_metaheuristics.utils.enums import AlgorithmName
+from cvrp_metaheuristics.utils.file_utils import save_results_to_file, save_best_run_to_file, read_problem
 
 
 def solve_problem(cvrp: Cvrp, config: Config) -> None:
-    algorithm_mapping = {
+    algorithm_mapping: Dict[AlgorithmName, Callable[[], list[Result]]] = {
         AlgorithmName.GENETIC: GeneticAlgorithm(cvrp, config).solve,
         AlgorithmName.RANDOM: RandomAlgorithm(cvrp, config).solve,
         AlgorithmName.GREEDY: GreedyAlgorithm(cvrp, config).solve,
-        AlgorithmName.ANNEALING: solve_cvrp_annealing
     }
 
     selected_algorithm = algorithm_mapping.get(config.algorithm)
@@ -28,8 +27,8 @@ def solve_problem(cvrp: Cvrp, config: Config) -> None:
     if selected_algorithm:
         start_time = time.time()
         if config.algorithm.is_metaheuristic():
-            global_best = sys.maxsize
-            global_avg = 0
+            global_best = sys.float_info.max
+            global_avg = 0.0
             global_best_genotype = []
             global_best_run = []
             for i in range(config.no_of_runs):
@@ -65,7 +64,7 @@ def solve_problem(cvrp: Cvrp, config: Config) -> None:
 
 
 def main():
-    root_dir = Path(__file__).resolve().parents[1]
+    root_dir = Path(__file__).resolve().parent.parent
     config_file_path = root_dir / "config/config.yaml"
     data_set_dir = root_dir / "resources/data_set/A"
 

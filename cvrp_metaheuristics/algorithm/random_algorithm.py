@@ -1,10 +1,9 @@
 import random
 import sys
 
-from algorithm.algorithm import Algorithm
-from algorithm.result import Result
-from problem.cvrp import cost, Cvrp
-from utils.configuration import Config
+from cvrp_metaheuristics.algorithm.algorithm import Algorithm
+from cvrp_metaheuristics.algorithm.result import Result
+from cvrp_metaheuristics.problem.cvrp import cost
 
 
 class RandomAlgorithm(Algorithm):
@@ -14,13 +13,11 @@ class RandomAlgorithm(Algorithm):
 
     def solve(self) -> list[Result]:
         no_of_solutions = self.config.population_size * self.config.generations
-        best = sys.maxsize
+        best = sys.float_info.max
         best_genotype = []
-        average = 0
-        solutions = []
+        average = 0.0
         for _ in range(no_of_solutions):
             solution = self.generate_random_solution()
-            solutions.append(solution)
             solution_cost = cost(self.cvrp, solution)
             if solution_cost < best:
                 best = solution_cost
@@ -35,7 +32,3 @@ class RandomAlgorithm(Algorithm):
     def generate_random_solution(self) -> list[int]:
         city_ids = list(range(1, self.no_of_cities))
         return random.sample(city_ids, len(city_ids))
-
-
-
-

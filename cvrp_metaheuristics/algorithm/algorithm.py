@@ -1,9 +1,9 @@
 from abc import abstractmethod, ABC
 
-from src.algorithm.result import Result
-from src.problem.cvrp import Cvrp
-from src.utils.configuration import Config
-from utils.enums import Crossover, Initialization
+from cvrp_metaheuristics.algorithm.result import Result
+from cvrp_metaheuristics.problem.cvrp import Cvrp
+from cvrp_metaheuristics.utils.configuration import Config
+from cvrp_metaheuristics.utils.enums import Crossover, Initialization
 
 
 class Algorithm(ABC):
@@ -35,7 +35,7 @@ class Algorithm(ABC):
         return self.config.generations
 
     @property
-    def distances_matrix(self) -> list[list[int]]:
+    def distances_matrix(self) -> list[list[float]]:
         return self.cvrp.distances_matrix
 
     @property

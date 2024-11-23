@@ -1,0 +1,27 @@
+#!/bin/sh
+
+# Run flake8
+echo "Running flake8..."
+
+if [ $? -ne 0 ]; then
+  echo "flake8 failed. Commit aborted."
+  exit 1
+fi
+
+# Run tests
+echo "Running tests..."
+pytest test
+if [ $? -ne 0 ]; then
+  echo "Tests failed. Commit aborted."
+  exit 1
+fi
+
+# Run mypy
+echo "Running mypy..."
+mypy cvrp_metaheuristics
+if [ $? -ne 0 ]; then
+  echo "mypy failed. Commit aborted."
+  exit 1
+fi
+
+echo "All checks passed. Proceeding with commit."

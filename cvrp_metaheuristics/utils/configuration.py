@@ -1,6 +1,6 @@
 from typing import Any, Dict
 
-from utils.enums import AlgorithmName, Crossover, Mutation, Initialization
+from cvrp_metaheuristics.utils.enums import AlgorithmName, Crossover, Mutation, Initialization
 
 
 class Config:
@@ -18,7 +18,14 @@ class Config:
         self.init_type = Initialization(config_dict.get("init_type"))
 
     def __str__(self):
-        return f"problem_instance: {self.problem_instance}, no_of_runs: {self.no_of_runs}, algorithm: {self.algorithm}, " \
-               f"population_size: {self.population_size}, generations: {self.generations}, init_type: {self.init_type}, " \
-               f"crossover_probability: {self.crossover_probability}, mutation_probability: {self.mutation_probability}, " \
-               f"crossover_type: {self.crossover_type.name}, mutation_type: {self.mutation_type.name}, tournament_size: {self.tournament_size}"
+        return (f"problem_instance: {self.problem_instance},"
+                f" no_of_runs: {self.no_of_runs},"
+                f" algorithm: {self.algorithm},"
+                f" population_size: {self.population_size},"
+                f" generations: {self.generations},"
+                f" init_type: {self.init_type},"
+                f" crossover_probability: {self.crossover_probability},"
+                f" mutation_probability: {self.mutation_probability},"
+                f" crossover_type: {self.crossover_type.name},"
+                f" mutation_type: {self.mutation_type.name},"
+                f" tournament_size: {self.tournament_size}")

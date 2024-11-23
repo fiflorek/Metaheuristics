@@ -2,10 +2,10 @@ from datetime import datetime
 import os
 from pathlib import Path
 
-from algorithm.result import Result
-from problem.cvrp import Cvrp, City
-from utils.configuration import Config
-from utils.enums import DataFileConstants as DFC
+from cvrp_metaheuristics.algorithm.result import Result
+from cvrp_metaheuristics.problem.cvrp import Cvrp, City
+from cvrp_metaheuristics.utils.configuration import Config
+from cvrp_metaheuristics.utils.enums import DataFileConstants as DFC
 
 root_dir = Path(__file__).resolve().parents[2]
 

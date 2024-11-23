@@ -40,8 +40,6 @@ problem_instance: "A-n32-k5"
 no_of_runs: 1
 algorithm: "greedy"
 ```
-
-
 ## Setup and Run
 1. Clone the repository  
 `git clone git@github.com:fiflorek/Metaheuristics.git`
@@ -50,10 +48,14 @@ algorithm: "greedy"
 `source venv/bin/activate`
 3. Install requirements  
 `pip install -r requirements.txt`
-4. Configure algorithm parameters in config.yaml
-5. Run the program  
-`python src/metaheuristics.py`
-The results are saved in the "results" directory relative to where the script is run from.
+4. (Dev only) Install the pre-commit hooks:
+`cp ./git-hooks/pre-commit ./.git/hooks/pre-commit`  
+5. Install ala (e is for editable, otherwise omit):
+`pip install -e .`
+6. Configure algorithm parameters in config.yaml
+7. Run the program  
+`python cvpr_metahueristics/metaheuristics.py`
+The results are saved in the "results" directory relative to where the script is run from.)
 
 ## Algorithms
 ### Greedy
