@@ -38,7 +38,8 @@ class GreedyAlgorithm(Algorithm):
         for i in range(1, self._cvrp.no_of_cities):
             self.visit_city(self.find_nearest_city_not_yet_visited(), i)
 
-        genotype = [city_id for city_id, visit_sequence in sorted(self.visited_cities.items(), key=lambda item: item[1])]
+        genotype = [city_id for city_id, visit_sequence in
+                    sorted(self.visited_cities.items(), key=lambda item: item[1])]
         best = average = cost(self.cvrp, genotype)
         # not including depot number in the solution (0)
         genotype.remove(self.depot_number)

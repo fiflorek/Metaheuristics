@@ -34,14 +34,16 @@ class Cvrp:
 
     def __str__(self):
         print(
-            f"CVRP(no_of_cities={self.no_of_cities}, truck_capacity={self.truck_capacity}, depot_number={self.depot_number})")
+            f"CVRP(no_of_cities={self.no_of_cities},"
+            f" truck_capacity={self.truck_capacity},"
+            f" depot_number={self.depot_number})")
 
 
 def distance(city_a: City, city_b: City) -> float:
     return round(math.sqrt((city_a.x - city_b.x) ** 2 + (city_a.y - city_b.y) ** 2), 2)
 
 
-# this function needs to be refactored - take into account when truck is ie. 80% empty - maybe then turn back instead of going to depot only when its empty
+# take into account when truck is ie. 80% empty - maybe then turn back instead of going to depot only when its empty
 def cost(cvrp: Cvrp, route: list[int]) -> float:
     # first step is from depot to first city
     depot_city_number = cvrp.depot_number

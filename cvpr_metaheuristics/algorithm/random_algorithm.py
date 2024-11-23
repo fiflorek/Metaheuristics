@@ -34,7 +34,3 @@ class RandomAlgorithm(Algorithm):
     def generate_random_solution(self) -> list[int]:
         city_ids = list(range(1, self.no_of_cities))
         return random.sample(city_ids, len(city_ids))
-
-
-
-
