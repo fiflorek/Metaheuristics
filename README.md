@@ -40,18 +40,6 @@ problem_instance: "A-n32-k5"
 no_of_runs: 1
 algorithm: "greedy"
 ```
-**Step 3** Install ala (e is for editable, otherwise omit):
-
-```bash
-pip install -e .
-```
-
-**Step 4** (Dev only) Install the pre-commit hooks:
-
-```bash
-cp ./git-hooks/pre-commit ./.git/hooks/pre-commit
-```
-
 ## Setup and Run
 1. Clone the repository  
 `git clone git@github.com:fiflorek/Metaheuristics.git`
