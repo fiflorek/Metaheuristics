@@ -1,8 +1,9 @@
 import random
+from typing import Type
 
-from algorithm.greedy_algorithm import GreedyAlgorithm
-from problem.cvrp import Cvrp
-from algorithm.config.configuration import Config
+from cvrp_metaheuristics.algorithm.greedy_algorithm import GreedyAlgorithm
+from cvrp_metaheuristics.problem.cvrp import Cvrp
+from cvrp_metaheuristics.algorithm.config.configuration import Config
 
 
 def init_random_genotype(cvrp: Cvrp) -> list[int]:

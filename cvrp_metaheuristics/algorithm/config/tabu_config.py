@@ -1,7 +1,7 @@
-from typing import Dict, Any
+from typing import Dict, Any, Union
 
-from algorithm.config.configuration import Config
-from utils.enums import Mutation, Initialization
+from cvrp_metaheuristics.algorithm.config.configuration import Config
+from cvrp_metaheuristics.utils.enums import Mutation, Initialization
 
 
 class TabuSearchConfig(Config):
@@ -12,7 +12,7 @@ class TabuSearchConfig(Config):
     _tabu_list_size: int
     _mutation_type: Mutation
 
-    def __init__(self, config_dict: Dict[str, Any]):
+    def __init__(self, config_dict):
         super().__init__(config_dict)
         self._no_of_runs = config_dict.get("no_of_runs", 1)
         self._init_type = Initialization(config_dict.get("init_type", "random"))

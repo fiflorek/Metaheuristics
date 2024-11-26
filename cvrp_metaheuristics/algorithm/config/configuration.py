@@ -1,6 +1,6 @@
 from typing import Any, Dict
 
-from utils.enums import AlgorithmName, Crossover, Mutation, Initialization
+from cvrp_metaheuristics.utils.enums import AlgorithmName, Crossover, Mutation, Initialization
 
 
 class Config:
@@ -12,4 +12,5 @@ class Config:
         self.algorithm = AlgorithmName(config_dict.get("algorithm", "greedy"))
 
     def __str__(self):
-        return f"Problem instance: {self.problem_instance}\n, Algorithm: {self.algorithm}\n"
+        return (f"Problem instance: {self.problem_instance}\n"
+                f"Algorithm: {self.algorithm}\n")

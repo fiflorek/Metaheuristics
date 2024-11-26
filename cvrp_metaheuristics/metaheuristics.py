@@ -1,15 +1,11 @@
 import sys
 import time
 from pathlib import Path
-from typing import Callable, Dict
+from typing import Dict, Type
 
 import yaml
 
-from typing import Union
-
-import yaml
-
-from algorithm.annealing_algorithm import solve_cvrp_annealing
+from cvrp_metaheuristics.algorithm.config.configuration import Config
 from cvrp_metaheuristics.algorithm.config.genetic_config import GeneticConfig
 from cvrp_metaheuristics.algorithm.config.random_config import RandomConfig
 from cvrp_metaheuristics.algorithm.config.tabu_config import TabuSearchConfig
@@ -19,31 +15,30 @@ from cvrp_metaheuristics.algorithm.random_algorithm import RandomAlgorithm
 from cvrp_metaheuristics.algorithm.result import Result
 from cvrp_metaheuristics.algorithm.tabu_search import TabuSearch
 from cvrp_metaheuristics.problem.cvrp import Cvrp
-from cvrp_metaheuristics.algorithm.config.configuration import Config
 from cvrp_metaheuristics.utils.enums import AlgorithmName
 from cvrp_metaheuristics.utils.file_utils import save_results_to_file, save_best_run_to_file, read_problem
 
 
-def solve_problem(cvrp: Cvrp, config: Union[GeneticConfig, RandomConfig, TabuSearchConfig, Config]) -> None:
-    algorithm_mapping: Dict[AlgorithmName, Callable[[], list[Result]]] = {
+def solve_problem(cvrp: Cvrp, config) -> None:
+    algorithm_mapping: Dict[AlgorithmName, Type[GeneticAlgorithm | RandomAlgorithm | GreedyAlgorithm | TabuSearch]] = {
         AlgorithmName.GENETIC: GeneticAlgorithm,
         AlgorithmName.RANDOM: RandomAlgorithm,
         AlgorithmName.GREEDY: GreedyAlgorithm,
         AlgorithmName.TABU_SEARCH: TabuSearch,
     }
 
-    selected_algorithm = algorithm_mapping.get(config.algorithm)
-    solve_problem = selected_algorithm(cvrp, config).solve
+    selected_algorithm = algorithm_mapping.get(config.algorithm, GreedyAlgorithm)
+    solve = selected_algorithm(cvrp, config).solve
 
     if selected_algorithm:
         start_time = time.time()
         if config.algorithm.is_metaheuristic():
             global_best = sys.float_info.max
             global_avg = 0.0
-            global_best_genotype = []
-            global_best_run = []
+            global_best_genotype: list[int] = []
+            global_best_run: list[Result] = []
             for i in range(config.no_of_runs):
-                run_i = solve_problem()
+                run_i = solve()
                 for generation in run_i:
                     if generation.best < global_best:
                         global_best = generation.best
@@ -65,7 +60,7 @@ def solve_problem(cvrp: Cvrp, config: Union[GeneticConfig, RandomConfig, TabuSea
         else:
             # No need to loop over greedy since its deterministic.
             # Random is not deterministic but let's not waste resources.
-            result = solve_problem()[0]
+            result = solve()[0]
             end_time = time.time()
             avg_execution_time = round(end_time - start_time, 2)
             save_results_to_file(result, config, avg_execution_time)

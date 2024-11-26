@@ -1,4 +1,4 @@
-from algorithm.config.configuration import Config
+from cvrp_metaheuristics.algorithm.config.configuration import Config
 
 
 class RandomConfig(Config):

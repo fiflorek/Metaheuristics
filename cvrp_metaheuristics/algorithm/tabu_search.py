@@ -6,7 +6,7 @@ from cvrp_metaheuristics.algorithm.algorithm import Algorithm
 from cvrp_metaheuristics.algorithm.result import Result
 from cvrp_metaheuristics.utils.enums import Initialization, Mutation
 from cvrp_metaheuristics.problem.individual import Individual, mutate
-from utils.init_methods import init_random_genotype, init_greedy_genotype
+from cvrp_metaheuristics.utils.init_methods import init_random_genotype, init_greedy_genotype
 
 
 class TabuSearch(Algorithm):
@@ -28,13 +28,13 @@ class TabuSearch(Algorithm):
     def current_best(self) -> Individual:
         return self._current_best
 
-    @property
-    def tabu_set(self) -> Set[int]:
-        return self._tabu_set
-
     @current_best.setter
     def current_best(self, best: Individual) -> None:
         self._current_best = best
+
+    @property
+    def tabu_set(self) -> Set[int]:
+        return self._tabu_set
 
     @property
     def tabu_list(self) -> list[int]:
@@ -88,7 +88,7 @@ class TabuSearch(Algorithm):
             neighbours.append(neighbour)
         return neighbours
 
-    def best_neighbour_not_in_tabu(self, neighbours: list[Individual]) -> Individual:
+    def best_neighbour_not_in_tabu(self, neighbours: list[Individual]) -> Individual | None:
         best_neighbour = None
         best_neighbour_fitness = float('inf')
         for i in range(1, len(neighbours)):

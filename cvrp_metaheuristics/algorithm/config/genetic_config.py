@@ -1,7 +1,7 @@
-from typing import Dict, Any
+from typing import Dict, Any, Union
 
-from algorithm.config.configuration import Config
-from utils.enums import Crossover, Mutation, Initialization
+from cvrp_metaheuristics.algorithm.config.configuration import Config
+from cvrp_metaheuristics.utils.enums import Crossover, Mutation, Initialization
 
 
 class GeneticConfig(Config):
@@ -15,7 +15,7 @@ class GeneticConfig(Config):
     _mutation_type: Mutation
     _tournament_size: int
 
-    def __init__(self, config_dict: Dict[str, Any]):
+    def __init__(self, config_dict):
         super().__init__(config_dict)
         self._no_of_runs = config_dict.get("no_of_runs", 1)
         self._population_size = config_dict.get("population_size", 100)

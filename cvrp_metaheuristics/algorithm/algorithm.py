@@ -1,15 +1,14 @@
 from abc import abstractmethod, ABC
 
+from cvrp_metaheuristics.algorithm.config.configuration import Config
 from cvrp_metaheuristics.algorithm.result import Result
 from cvrp_metaheuristics.problem.cvrp import Cvrp
-from cvrp_metaheuristics.utils.configuration import Config
-from cvrp_metaheuristics.utils.enums import Crossover, Initialization
 
 
 class Algorithm(ABC):
     """Base class for algorithms."""
     _cvrp: Cvrp  # problem that the algorithm is trying to solve
-    _config: Config
+    _config: Config  # configuration of the algorithm
     _result_list: list[Result]
 
     def __init__(self, cvrp: Cvrp, config: Config) -> None:
@@ -25,14 +24,6 @@ class Algorithm(ABC):
     @property
     def no_of_cities(self) -> int:
         return self.cvrp.no_of_cities
-
-    @property
-    def population_size(self) -> int:
-        return self.config.population_size
-
-    @property
-    def generations(self) -> int:
-        return self.config.generations
 
     @property
     def distances_matrix(self) -> list[list[float]]:
