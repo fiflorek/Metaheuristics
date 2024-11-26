@@ -1,5 +1,3 @@
-from typing import Dict, Any, Union
-
 from cvrp_metaheuristics.algorithm.config.configuration import Config
 from cvrp_metaheuristics.utils.enums import Mutation, Initialization
 

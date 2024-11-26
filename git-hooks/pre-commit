@@ -2,7 +2,7 @@
 
 # Run flake8
 echo "Running flake8..."
-
+flake8 cvrp_metaheuristics
 if [ $? -ne 0 ]; then
   echo "flake8 failed. Commit aborted."
   exit 1

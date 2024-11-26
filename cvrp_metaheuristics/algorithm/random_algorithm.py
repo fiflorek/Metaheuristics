@@ -1,6 +1,5 @@
 import sys
 
-
 from cvrp_metaheuristics.algorithm.algorithm import Algorithm
 from cvrp_metaheuristics.algorithm.config.random_config import RandomConfig
 from cvrp_metaheuristics.algorithm.result import Result
@@ -35,7 +34,3 @@ class RandomAlgorithm(Algorithm):
 
     def generate_random_solution(self) -> list[int]:
         return init_random_genotype(self.cvrp)
-
-
-
-
