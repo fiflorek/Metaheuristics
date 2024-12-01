@@ -37,6 +37,7 @@ class GeneticConfig(Config):
             raise ValueError('Tournament size has to be in range [1, population_size]')
         return self
 
+
     @field_validator('crossover_probability', 'mutation_probability')
     def is_valid_probability(cls, value: float) -> float:
         if value < 0.0 or value > 1.0:
