@@ -1,4 +1,3 @@
-import argparse
 import sys
 import time
 from pathlib import Path
@@ -18,6 +17,7 @@ from cvrp_metaheuristics.algorithm.tabu_search import TabuSearch
 from cvrp_metaheuristics.problem.cvrp import Cvrp
 from cvrp_metaheuristics.utils.enums import AlgorithmName
 from cvrp_metaheuristics.utils.file_utils import save_results_to_file, save_best_run_to_file, read_problem
+from cvrp_metaheuristics.utils.config_help import configure_arg_parser
 
 
 def solve_problem(cvrp: Cvrp, config) -> None:
@@ -71,16 +71,11 @@ def solve_problem(cvrp: Cvrp, config) -> None:
 
 
 def main():
-    parser = argparse.ArgumentParser(
-        prog="cvrp_metaheuristics",
-        description="This program solves Capacitated Vehicle Routing Problem using metaheuristic algorithms",
-        epilog="The default configuration file resides in config/config.yaml "
-               "The file contains examples of configurations for various algorithms."
-    )
-    parser.add_argument("-c", "--config", default="config/config.yaml", help="Path to the configuration file", type=str)
+
+    parser = configure_arg_parser()
     args = parser.parse_args()
     root_dir = Path(__file__).resolve().parent.parent
-    config_file_path = root_dir / "config/config.yaml"
+    config_file_path = root_dir / args.config
     data_set_dir = root_dir / "resources/data_set/A"
 
     with open(config_file_path, 'r') as file:
