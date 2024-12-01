@@ -1,3 +1,4 @@
+import argparse
 import sys
 import time
 from pathlib import Path
@@ -71,7 +72,6 @@ def solve_problem(cvrp: Cvrp, config) -> None:
 
 
 def main():
-
     parser = configure_arg_parser()
     args = parser.parse_args()
     root_dir = Path(__file__).resolve().parent.parent

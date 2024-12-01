@@ -23,6 +23,7 @@ def save_results_to_file(result: Result, config: Config, execution_time: float) 
         file.write(config.model_dump_json())
 
 
+
 # this method saves best run - file is later used to generate a plot
 def save_best_run_to_file(best_run: list[tuple[float, float]], config: Config) -> None:
     results_dir = get_or_create_results_dir(config.problem_instance, config.algorithm)
