@@ -81,6 +81,10 @@ def main():
     with open(config_file_path, 'r') as file:
         configuration = yaml.safe_load(file)
 
+    if configuration is None:
+        print("Could not load the file. Using default values.")
+        configuration = {}
+
     config_mapping = {
         AlgorithmName.GENETIC: GeneticConfig,
         AlgorithmName.RANDOM: RandomConfig,
