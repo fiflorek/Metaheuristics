@@ -65,3 +65,4 @@ Not implemented yet
 ### Tabu Search
 Tabu Search is an iterative neighborhood search algorithm, where the neighborhood changes dynamically. In this implementation neighbourhood is defined as an individual "one mutation away" from the base individual. Tabu search enhances local search by avoiding points in the search space which are already visited. Therefore, loops in search space are avoided and local optima can be escaped. 
 [Tabu Search](https://www.geeksforgeeks.org/what-is-tabu-search/)
+

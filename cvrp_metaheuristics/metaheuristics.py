@@ -1,4 +1,3 @@
-import argparse
 import sys
 import time
 from pathlib import Path
@@ -19,6 +18,7 @@ from cvrp_metaheuristics.problem.cvrp import Cvrp
 from cvrp_metaheuristics.utils.config_help import configure_arg_parser
 from cvrp_metaheuristics.utils.enums import AlgorithmName
 from cvrp_metaheuristics.utils.file_utils import save_results_to_file, save_best_run_to_file, read_problem
+from cvrp_metaheuristics.utils.config_help import configure_arg_parser
 
 
 def solve_problem(cvrp: Cvrp, config) -> None:
