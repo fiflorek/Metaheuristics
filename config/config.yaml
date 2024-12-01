@@ -1,6 +1,6 @@
 #GREEDY
-#problem_instance: "A-n32-k5"
-#algorithm: "greedy"
+problem_instance: "A-n32-k5"
+algorithm: "greedy"
 
 #RANDOM
 #problem_instance: "A-n32-k5"
@@ -21,11 +21,11 @@
 #tournament_size: 6
 
 #TABU_SEARCH
-problem_instance: "A-n32-k5"
-no_of_runs: 1
-algorithm: "tabu_search"
-generations: 100
-init_type: 'greedy'
-neighbourhood_size: 500
-tabu_list_size: 100
-mutation_type: 'swap'
+#problem_instance: "A-n32-k5"
+#no_of_runs: 1
+#algorithm: "tabu_search"
+#generations: 100
+#init_type: 'greedy'
+#neighbourhood_size: 500
+#tabu_list_size: 100
+#mutation_type: 'swap'

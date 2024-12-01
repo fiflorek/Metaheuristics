@@ -1,3 +1,4 @@
+import argparse
 import sys
 import time
 from pathlib import Path
@@ -70,6 +71,14 @@ def solve_problem(cvrp: Cvrp, config) -> None:
 
 
 def main():
+    parser = argparse.ArgumentParser(
+        prog="cvrp_metaheuristics",
+        description="This program solves Capacitated Vehicle Routing Problem using metaheuristic algorithms",
+        epilog="The default configuration file resides in config/config.yaml "
+               "The file contains examples of configurations for various algorithms."
+    )
+    parser.add_argument("-c", "--config", default="config/config.yaml", help="Path to the configuration file", type=str)
+    args = parser.parse_args()
     root_dir = Path(__file__).resolve().parent.parent
     config_file_path = root_dir / "config/config.yaml"
     data_set_dir = root_dir / "resources/data_set/A"

@@ -18,7 +18,7 @@ def save_results_to_file(result: Result, config: Config, execution_time: float) 
         file.write(f"Average: {result.average}\n")
         file.write(f"Best genotype: {result.best_genotype}\n")
         file.write(f"Execution time: {execution_time}\n")
-        file.write(f"Configuration: \n{config.__str__()}\n")
+        file.write(f"{config.__str__()}\n")
 
 
 # this method saves best run - file is later used to generate a plot

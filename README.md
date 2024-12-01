@@ -13,30 +13,12 @@ In the CVRP case a solution may be represented as a list of integers, where each
 
 ## Configuration
 The program is configured using the `config.yaml` file. This allows user to use different algorithms and parameters to try to solve the problem.
-Currently, three algorithms/metaheuristics are supported: "greedy", "random", and "genetic".
-Here are example configuration parameters:
-```yaml
-problem_instance: "A-n32-k5"
-no_of_runs: 10
-algorithm: "genetic"
-population_size: 100
-generations: 500
-crossover_probability: 0.6
-mutation_probability: 0.2
-mutation_type: 'swap'
-tournament_size: 6
-```
-___
-```yaml
-problem_instance: "A-n32-k5"
-algorithm: "random"
-no_of_solutions: 1000
-```
-___
-```yaml
-problem_instance: "A-n32-k5"
-algorithm: "greedy"
-```
+Currently, four algorithms/metaheuristics are supported: "greedy", "random", "genetic" and "tabu search". Please see the `config.yaml` file for configuration examples.
+
+## Output
+The program saves results in the `results` directory. Each algorithm produces a `results.txt` file which contains basic information like best genotype and it's fitness. 
+Additionally, each methaueristic produces a `best_run.txt` file that contains information on how the solution was changing over time.
+
 ## Setup and Run
 1. Clone the repository  
 `git clone git@github.com:fiflorek/Metaheuristics.git`
@@ -72,7 +54,7 @@ Inversion mutation inverts a random segment of the solution.  ```[1, 2, 3, 4, 5]
 **Crossover** - this operator combines two solutions to create a new one. This project has two types of crossover implemented so far: OX (Order Crossover) and PMX (Partially Matched Crossover).
 Ordered Crossover defines a subset of the first parent's genes and fills the rest of the child with the second parent's genes.  
 ```[1, 2, 3, 4, 5]``` and ```[5, 4, 3, 2, 1]``` -> ```[1, 4, 3, 2, 5]``` where the subset is ```[4, 3, 2]```  
-Partially Matched Crossover defines a mapping between the parents as described in the image below.
+Partially Matched Crossover defines a mapping between the parents as described in the image below.  
 ![img.png](img.png)  
 **Selection** - this operator selects the solutions from the population as parents for the crossover (and effectively next generation). This project uses tournament selection.
 Tournament selection works by selecting a random subset of solutions from the population and then selecting the best solution from this subset. It's important to tune this operator parameters - too strict selection may lead to algorithm getting stuck in the local optimum, while too loose selection may lead to the algorithm not converging at all.
