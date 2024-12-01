@@ -26,8 +26,8 @@ class TabuSearchConfig(Config):
         super().__init__(config_dict)
         self._no_of_runs = config_dict.get("no_of_runs", 1)
         self._init_type = Initialization(config_dict.get("init_type", "random"))
-        self._neighbourhood_size = config_dict.get("neighbourhood_size")
-        self._tabu_list_size = config_dict.get("tabu_list_size")
+        self._neighbourhood_size = config_dict.get("neighbourhood_size", 100)
+        self._tabu_list_size = config_dict.get("tabu_list_size", 50)
         self._mutation_type = Mutation(config_dict.get("mutation_type", "swap"))
         self._generations = config_dict.get("generations", 10)
 

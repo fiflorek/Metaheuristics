@@ -32,11 +32,11 @@ class GeneticConfig(Config):
         self._no_of_runs = config_dict.get("no_of_runs", 1)
         self._population_size = config_dict.get("population_size", 100)
         self._generations = config_dict.get("generations", 10)
-        self._crossover_probability = config_dict.get("crossover_probability")
+        self._crossover_probability = config_dict.get("crossover_probability", 0.5)
         self._crossover_type = Crossover(config_dict.get("crossover_type", "ox"))
-        self._mutation_probability = config_dict.get("mutation_probability")
+        self._mutation_probability = config_dict.get("mutation_probability", 0.5)
         self._mutation_type = Mutation(config_dict.get("mutation_type", "swap"))
-        self._tournament_size = config_dict.get("tournament_size")
+        self._tournament_size = config_dict.get("tournament_size", 10)
         self._init_type = Initialization(config_dict.get("init_type", "random"))
 
     @property
