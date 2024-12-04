@@ -29,7 +29,7 @@ class Cvrp:
     def print_distances_matrix(self) -> None:
         for i, row in enumerate(self.distances_matrix):
             for j, element in enumerate(row):
-                print(self.distances_matrix[i][j], end=' ')
+                print(f'{self.distances_matrix[i][j]:6.2f}', end=' ')
             print()
 
     def __str__(self):
