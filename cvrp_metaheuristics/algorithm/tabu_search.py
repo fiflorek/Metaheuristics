@@ -54,7 +54,7 @@ class TabuSearch(Algorithm):
 
     def solve(self) -> list[Result]:
         results = []
-        for i in range(1, self.generations):
+        for i in range(0, self.generations):
             neighbours = self.search_neighbourhood()
             best_neighbour = self.best_neighbour_not_in_tabu(neighbours)
             # if all neighbours were already visited (are in tabu list) we're switching the neighbourhood drastically
@@ -79,9 +79,6 @@ class TabuSearch(Algorithm):
     def search_neighbourhood(self) -> list[Individual]:
         neighbours: list[Individual] = []
         for i in range(self.neighbourhood_size):
-            # TO CHECK: is it updated in place?
-            # neighbour_genotype = self.current_best.genotype[:]
-            # individual.mutate(neighbour_genotype, self.mutation_type)
             neighbour_genotype = mutate(self.current_best.genotype[:], self.mutation_type)
             neighbour = Individual(neighbour_genotype)
             neighbour.evaluate(self.cvrp)

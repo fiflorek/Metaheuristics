@@ -1,13 +1,19 @@
-from unittest import TestCase
+import pytest
 
-from cvrp_metaheuristics.problem.cvrp import City, Cvrp
+from cvrp_metaheuristics.algorithm.result import Result
+from cvrp_metaheuristics.algorithm.random_algorithm import RandomAlgorithm
+from cvrp_metaheuristics.algorithm.config.random_config import RandomConfig
 
 
-class TestRandomAlgorithm(TestCase):
+@pytest.fixture
+def random_config():
+    return RandomConfig({"algorith": "random", "problem_instance": "toy", "no_of_solutions": 100})
 
-    def setUp(self):
-        cities = [City(i, i * 10, i * 10, i * 5) for i in range(5)]
-        self.cvrp = Cvrp(no_of_cities=5, truck_capacity=100, cities=cities, depot_number=0)
 
-    def test_generate_random_solution(self):
-        pass
+def test_solve_random(cvrp, random_config):
+    result = RandomAlgorithm(cvrp, random_config).solve()
+    assert all(isinstance(r, Result) for r in result)
+    assert len(result) == 1
+    assert len(result[0].best_genotype) == cvrp.no_of_cities - 1
+    assert result[0].best > 0
+    assert result[0].average > 0
