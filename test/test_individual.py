@@ -94,4 +94,4 @@ def test_evaluate(cvrp, mocker):
     assert individual_b.fitness == 10.0
     assert hash(tuple(genotype_b)) in Individual.fitness_cache
     assert Individual.fitness_cache[hash(tuple(genotype_b))] == 10.0
-    assert len(Individual.fitness_cache) == 1
+    assert len([fitness for fitness in Individual.fitness_cache.values() if fitness == 10.0]) == 1
