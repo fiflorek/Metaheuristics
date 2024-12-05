@@ -2,6 +2,12 @@ from cvrp_metaheuristics.algorithm.config.configuration import Config
 
 
 class RandomConfig(Config):
+    """
+    Configuration for Random Algorithm.
+
+        Parameters:
+            no_of_solutions: int -> Number of solutions to generate
+    """
     _no_of_solutions: int
 
     def __init__(self, config_dict):

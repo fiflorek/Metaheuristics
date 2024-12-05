@@ -17,6 +17,7 @@ from cvrp_metaheuristics.algorithm.tabu_search import TabuSearch
 from cvrp_metaheuristics.problem.cvrp import Cvrp
 from cvrp_metaheuristics.utils.enums import AlgorithmName
 from cvrp_metaheuristics.utils.file_utils import save_results_to_file, save_best_run_to_file, read_problem
+from cvrp_metaheuristics.utils.config_help import configure_arg_parser
 
 
 def solve_problem(cvrp: Cvrp, config) -> None:
@@ -70,12 +71,19 @@ def solve_problem(cvrp: Cvrp, config) -> None:
 
 
 def main():
+
+    parser = configure_arg_parser()
+    args = parser.parse_args()
     root_dir = Path(__file__).resolve().parent.parent
-    config_file_path = root_dir / "config/config.yaml"
+    config_file_path = root_dir / args.config
     data_set_dir = root_dir / "resources/data_set/A"
 
     with open(config_file_path, 'r') as file:
         configuration = yaml.safe_load(file)
+
+    if configuration is None:
+        print("Could not load the file. Using default values.")
+        configuration = {}
 
     config_mapping = {
         AlgorithmName.GENETIC: GeneticConfig,
