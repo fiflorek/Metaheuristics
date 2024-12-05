@@ -6,9 +6,10 @@ class AlgorithmName(Enum):
     RANDOM = 'random'
     GREEDY = 'greedy'
     ANNEALING = 'annealing'
+    TABU_SEARCH = 'tabu_search'
 
     def is_metaheuristic(self):
-        return self in [AlgorithmName.GENETIC, AlgorithmName.ANNEALING]
+        return self in [AlgorithmName.GENETIC, AlgorithmName.ANNEALING, AlgorithmName.TABU_SEARCH]
 
 
 class Mutation(Enum):

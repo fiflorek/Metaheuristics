@@ -1,12 +1,13 @@
 import random
 
-from cvrp_metaheuristics.algorithm.greedy_algorithm import GreedyAlgorithm
+from cvrp_metaheuristics.algorithm.config.genetic_config import GeneticConfig
 from cvrp_metaheuristics.algorithm.algorithm import Algorithm
 from cvrp_metaheuristics.algorithm.result import Result
 from cvrp_metaheuristics.problem import individual
 from cvrp_metaheuristics.problem.cvrp import Cvrp
 from cvrp_metaheuristics.problem.individual import Individual
-from cvrp_metaheuristics.utils.enums import Initialization
+from cvrp_metaheuristics.utils.enums import Initialization, Crossover, Mutation
+from cvrp_metaheuristics.utils.init_methods import init_random_genotype, init_greedy_genotype
 
 
 class Population:
@@ -31,6 +32,7 @@ class Population:
 class GeneticAlgorithm(Algorithm):
     _current_population: Population
     _current_best: Individual
+    config: GeneticConfig
 
     def _initialize_algorithm(self) -> None:
         self.initialize_population()
@@ -69,7 +71,23 @@ class GeneticAlgorithm(Algorithm):
         return self.config.mutation_probability
 
     @property
-    def mutation_type(self):
+    def init_type(self) -> Initialization:
+        return self.config.init_type
+
+    @property
+    def population_size(self) -> int:
+        return self.config.population_size
+
+    @property
+    def generations(self) -> int:
+        return self.config.generations
+
+    @property
+    def crossover_type(self) -> Crossover:
+        return self.config.crossover_type
+
+    @property
+    def mutation_type(self) -> Mutation:
         return self.config.mutation_type
 
     def selection(self, population: list[Individual]) -> Individual:
@@ -83,11 +101,10 @@ class GeneticAlgorithm(Algorithm):
         population = []
         if self.init_type == Initialization.RANDOM:
             for _ in range(self.population_size):
-                genotype = list(range(1, self.no_of_cities))
-                random.shuffle(genotype)
+                genotype = init_random_genotype(self.cvrp)
                 population.append(Individual(genotype))
         else:
-            genotype = GreedyAlgorithm(self.cvrp, self.config).solve()[0].best_genotype
+            genotype = init_greedy_genotype(self.cvrp, self.config)
             for _ in range(self.population_size):
                 population.append(Individual(genotype))
 

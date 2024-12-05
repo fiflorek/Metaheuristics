@@ -29,15 +29,12 @@ tournament_size: 6
 ___
 ```yaml
 problem_instance: "A-n32-k5"
-no_of_runs: 1
 algorithm: "random"
-population_size: 10
-generations: 50
+no_of_solutions: 1000
 ```
 ___
 ```yaml
 problem_instance: "A-n32-k5"
-no_of_runs: 1
 algorithm: "greedy"
 ```
 ## Setup and Run
@@ -83,4 +80,4 @@ I will implement roulette wheel selection in the future.
 ### Simulated Annealing
 Not implemented yet
 ### Tabu Search
-Not implemented yet
+Tabu Search is an iterative neighborhood search algorithm, where the neighborhood changes dynamically. Tabu search enhances local search by avoiding points in the search space which are already visited. By avoiding already visited points, loops in search space are avoided and local optima can be escaped. 
