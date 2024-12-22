@@ -91,11 +91,11 @@ class TabuSearch(Algorithm):
     def best_neighbour_not_in_tabu(self, neighbours: list[Individual]) -> Individual | None:
         best_neighbour = None
         best_neighbour_fitness = float('inf')
-        for i in range(1, len(neighbours)):
-            if (neighbours[i].fitness < best_neighbour_fitness
-                    and hash(tuple(neighbours[i].genotype)) not in self.tabu_set):
-                best_neighbour_fitness = neighbours[i].fitness
-                best_neighbour = neighbours[i]
+        for neighbour in neighbours:
+            if (neighbour.fitness < best_neighbour_fitness
+                    and hash(tuple(neighbour.genotype)) not in self.tabu_set):
+                best_neighbour_fitness = neighbour.fitness
+                best_neighbour = neighbour
         return best_neighbour
 
     def update_tabu(self, best_neighbour) -> None:

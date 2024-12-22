@@ -1,10 +1,10 @@
-from pydantic import PositiveInt, BaseModel, Field, field_validator
+from pydantic import PositiveInt, BaseModel, field_validator
 
 from cvrp_metaheuristics.algorithm.config.configuration import Config
 from cvrp_metaheuristics.utils.enums import Mutation, Initialization
 
 
-class TabuSearchConfig(Config, BaseModel):
+class TabuSearchConfig(Config):
     """
     Configuration for Tabu Search Algorithm.
     
@@ -25,7 +25,7 @@ class TabuSearchConfig(Config, BaseModel):
     mutation_type: Mutation
 
     @field_validator('no_of_runs')
-    def is_valid_no_of_runs(self, value: int) -> int:
+    def is_valid_no_of_runs(cls, value: int) -> int:
         if value < 1 or value > 10:
             raise ValueError('Number of runs has to be in range [1, 10]')
         return value

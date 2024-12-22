@@ -1,6 +1,6 @@
 from typing import Self
 
-from pydantic import PositiveInt, model_validator, Field, field_validator
+from pydantic import PositiveInt, model_validator, field_validator
 
 from cvrp_metaheuristics.algorithm.config.configuration import Config
 from cvrp_metaheuristics.utils.enums import Crossover, Mutation, Initialization
@@ -34,17 +34,17 @@ class GeneticConfig(Config):
     @model_validator(mode='after')
     def is_less_than_pop_size(self) -> Self:
         if 0 > self.tournament_size or self.tournament_size >= self.population_size:
-            raise ValueError(f'Tournament size ({self.tournament_size}) has to be in range [1, population_size]')
+            raise ValueError(f'Tournament size has to be in range [1, population_size]')
         return self
 
     @field_validator('crossover_probability', 'mutation_probability')
-    def is_valid_probability(self, value: float) -> float:
+    def is_valid_probability(cls, value: float) -> float:
         if value < 0.0 or value > 1.0:
             raise ValueError('Probability has to be in range [0.0, 1.0]')
         return value
 
     @field_validator('no_of_runs')
-    def is_valid_no_of_runs(self, value: int) -> int:
+    def is_valid_no_of_runs(cls, value: int) -> int:
         if value < 1 or value > 10:
             raise ValueError('Number of runs has to be in range [1, 10]')
         return value
