@@ -7,7 +7,7 @@ from cvrp_metaheuristics.algorithm.config.random_config import RandomConfig
 
 @pytest.fixture
 def random_config():
-    return RandomConfig({"algorith": "random", "problem_instance": "toy", "no_of_solutions": 100})
+    return RandomConfig(**{"algorith": "random", "problem_instance": "toy", "no_of_solutions": 100})
 
 
 def test_solve_random(cvrp, random_config):

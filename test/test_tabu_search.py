@@ -8,7 +8,7 @@ from cvrp_metaheuristics.problem.individual import Individual
 
 @pytest.fixture
 def genetic_config():
-    return TabuSearchConfig({
+    return TabuSearchConfig(**{
         "problem_instance": "toy",
         "no_of_runs": 1,
         "algorithm": "tabu_search",

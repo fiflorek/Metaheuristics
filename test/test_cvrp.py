@@ -14,4 +14,4 @@ def test_distance(city_a, city_b, expected_distance):
 def test_cost(cvrp):
     genotype = [3, 1, 2, 5, 4]
     total = cost(cvrp, genotype)
-    assert total == 278.01
+    assert round(total, 2) == 278.01

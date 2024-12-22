@@ -7,7 +7,7 @@ from cvrp_metaheuristics.algorithm.config.configuration import Config
 
 @pytest.fixture
 def greedy_config():
-    return Config({"algorith": "random", "problem_instance": "toy"})
+    return Config(**{"algorith": "random", "problem_instance": "toy"})
 
 
 @pytest.fixture
