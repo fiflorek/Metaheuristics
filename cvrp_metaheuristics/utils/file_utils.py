@@ -13,12 +13,14 @@ root_dir = Path(__file__).resolve().parents[2]
 def save_results_to_file(result: Result, config: Config, execution_time: float) -> None:
     results_dir = get_or_create_results_dir(config.problem_instance, config.algorithm)
     results_file = results_dir / "results.txt"
+    config_file = results_dir / "config.json"
     with open(results_file, 'w') as file:
         file.write(f"Best: {result.best}\n")
         file.write(f"Average: {result.average}\n")
         file.write(f"Best genotype: {result.best_genotype}\n")
         file.write(f"Execution time: {execution_time}\n")
-        file.write(f"{config.__str__()}\n")
+    with open(config_file, 'w') as file:
+        file.write(config.model_dump_json())
 
 
 # this method saves best run - file is later used to generate a plot
