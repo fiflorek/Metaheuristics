@@ -28,7 +28,7 @@ class RandomAlgorithm(Algorithm):
             average += solution_cost
         average /= no_of_solutions
 
-        self.result_list.append(Result(best, round(average, 2), best_genotype))
+        self.result_list.append(Result(best, average, best_genotype))
 
         return self.result_list
 

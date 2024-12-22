@@ -47,9 +47,9 @@ def solve_problem(cvrp: Cvrp, config) -> None:
                         global_best_run = run_i
                     global_avg += generation.average
             global_avg /= (config.no_of_runs * config.generations)
-            global_result = Result(global_best, round(global_avg, 2), global_best_genotype)
+            global_result = Result(global_best, global_avg, global_best_genotype)
             end_time = time.time()
-            avg_execution_time = round((end_time - start_time) / config.no_of_runs, 2)
+            avg_execution_time = (end_time - start_time) / config.no_of_runs
 
             # As of now, best run saves only generation number, avg and best values.
             # It disregards the best genotype of each generation - but it might be used in the future

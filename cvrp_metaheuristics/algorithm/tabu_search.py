@@ -63,7 +63,7 @@ class TabuSearch(Algorithm):
                 best_neighbour = self.change_neighbourhood()
             self.current_best = best_neighbour
             self.update_tabu(best_neighbour)
-            avg_fitness = round(sum([neighbour.fitness for neighbour in neighbours]) / len(neighbours), 2)
+            avg_fitness = sum([neighbour.fitness for neighbour in neighbours]) / len(neighbours)
             results.append(Result(self.current_best.fitness, avg_fitness, self.current_best.genotype))
 
         return results

@@ -45,6 +45,6 @@ class GreedyAlgorithm(Algorithm):
         # not including depot number in the solution (0)
         genotype.remove(self.depot_number)
 
-        self.result_list.append(Result(best, round(average, 2), genotype))
+        self.result_list.append(Result(best, average, genotype))
 
         return self.result_list

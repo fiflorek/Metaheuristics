@@ -10,7 +10,7 @@ def configure_arg_parser():
     parser = argparse.ArgumentParser(
         formatter_class=argparse.RawDescriptionHelpFormatter,
         prog="cvrp_metaheuristics",
-        description="This program solves Capacitated Vehicle Routing Problem using metaheuristic algorithms",
+        description="This program solves the Capacitated Vehicle Routing Problem using metaheuristics.",
         epilog=f"""
         The default configuration file resides in `config/config.yaml`
         The file contains examples of configurations for various algorithms.

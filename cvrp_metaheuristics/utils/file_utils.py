@@ -15,8 +15,8 @@ def save_results_to_file(result: Result, config: Config, execution_time: float) 
     results_file = results_dir / "results.txt"
     config_file = results_dir / "config.json"
     with open(results_file, 'w') as file:
-        file.write(f"Best: {result.best}\n")
-        file.write(f"Average: {result.average}\n")
+        file.write(f"Best: {round(result.best, 2)}\n")
+        file.write(f"Average: {round(result.average, 2)}\n")
         file.write(f"Best genotype: {result.best_genotype}\n")
         file.write(f"Execution time: {execution_time}\n")
     with open(config_file, 'w') as file:
@@ -30,7 +30,7 @@ def save_best_run_to_file(best_run: list[tuple[float, float]], config: Config) -
 
     with open(best_run_file, 'w') as file:
         for generation, (best, avg) in enumerate(best_run):
-            file.write(f"{generation}, {best}, {avg}\n")
+            file.write(f"{generation}, {round(best, 2)}, {round(avg, 2)}\n")
 
 
 def get_or_create_results_dir(problem_instance, algorithm):

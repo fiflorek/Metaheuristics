@@ -19,7 +19,7 @@ class Population:
         return min(self.population, key=lambda ind: ind.fitness)
 
     def average_individual_fitness(self) -> float:
-        return round(sum([ind.fitness for ind in self.population]) / len(self.population), 2)
+        return sum([ind.fitness for ind in self.population]) / len(self.population)
 
     def worst_individual(self) -> Individual:
         return max(self.population, key=lambda ind: ind.fitness)
@@ -131,7 +131,7 @@ class GeneticAlgorithm(Algorithm):
             self.current_population.evaluate(self.cvrp)
             self.current_best = self.current_population.best_individual()
             self.result_list.append(Result(self.current_best.fitness,
-                                           round(self.current_population.average_individual_fitness(), 2),
+                                           self.current_population.average_individual_fitness(),
                                            self.current_best.genotype))
 
         return self.result_list
