@@ -41,6 +41,18 @@ def get_or_create_results_dir(problem_instance, algorithm):
 
 
 def read_problem(file_path: Path) -> Cvrp:
+    """
+    Reads a CVRP problem instance from a file and returns a Cvrp object.
+
+    This function reads the number of cities, truck capacity, city coordinates, city demands, and depot number
+    from the specified file and constructs a Cvrp object representing the problem instance.
+
+    Args:
+        file_path (Path): The path to the file containing the CVRP problem instance.
+
+    Returns:
+        Cvrp: An object representing the CVRP problem instance.
+    """
     no_of_cities = 0
     truck_capacity = 0
     city_coordinates = []

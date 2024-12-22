@@ -45,6 +45,7 @@ As the name suggests the Random algorithm generates a random sequence of cities 
 In this program the number of solutions generated equals `population_size * generations`.
 ### Genetic Algorithm
 Genetic algorithm is a metaheuristic inspired by the process of natural selection. It works by generating a population of solutions and then evolving them over a number of generations. The algorithm uses crossover and mutation operators to create new solutions.  
+[Genetic Algorithms](https://www.geeksforgeeks.org/genetic-algorithms/)  
 #### Flow Diagram  
 ![flow_diagram](https://github.com/user-attachments/assets/e3b84eb7-8fa0-489e-9702-ddb6ff0e075f)
 #### Operators
@@ -62,4 +63,5 @@ I will implement roulette wheel selection in the future.
 ### Simulated Annealing
 Not implemented yet
 ### Tabu Search
-Tabu Search is an iterative neighborhood search algorithm, where the neighborhood changes dynamically. In this implementation neighbourhood ise defined as an individual "one mutation away" from the base individual. Tabu search enhances local search by avoiding points in the search space which are already visited. By avoiding already visited points, loops in search space are avoided and local optima can be escaped. 
+Tabu Search is an iterative neighborhood search algorithm, where the neighborhood changes dynamically. In this implementation neighbourhood is defined as an individual "one mutation away" from the base individual. Tabu search enhances local search by avoiding points in the search space which are already visited. Therefore, loops in search space are avoided and local optima can be escaped. 
+[Tabu Search](https://www.geeksforgeeks.org/what-is-tabu-search/)

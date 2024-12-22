@@ -49,6 +49,19 @@ def distance(city_a: City, city_b: City) -> float:
 # which basically is checking if city_a -> depot -> city_b < depot -> city_a -> city_b
 
 def cost(cvrp: Cvrp, route: list[int]) -> float:
+    """
+    Calculates the total cost of a given route for the CVRP problem.
+
+    The cost is calculated based on the distances between cities and the truck's capacity.
+    If the truck's capacity is insufficient to visit the next city, it returns to the depot to refill.
+
+    Args:
+        cvrp (Cvrp): The CVRP problem instance containing cities, distances, and truck capacity.
+        route (list[int]): A list of city numbers representing the route to be evaluated.
+
+    Returns:
+        float: The total cost of the route.
+    """
     # first step is from depot to first city
     depot_city_number = cvrp.depot_number
     first_city = cvrp.cities[route[0]]

@@ -36,6 +36,16 @@ class GreedyAlgorithm(Algorithm):
     # search through not visited cities. Find the nearest one
 
     def solve(self) -> list[Result]:
+        """
+        Solves the CVRP problem using a Greedy Algorithm.
+
+        This method constructs a solution by iteratively selecting the best local option.
+
+        Returns:
+            list[Result]: A list of results, each containing the fitness of the best
+            individual, the average fitness of the constructed solutions, and the genotype
+            of the best individual. Because the algorithm is deterministic the list is always of size one.
+        """
         for i in range(1, self._cvrp.no_of_cities):
             self.visit_city(self.find_nearest_city_not_yet_visited(), i)
 

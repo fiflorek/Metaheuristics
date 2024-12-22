@@ -7,7 +7,7 @@ class RandomConfig(Config):
     """
     Configuration for Random Algorithm.
 
-    Parameters:
-    no_of_solutions: int -> Number of solutions to generate
+    Attributes:
+        no_of_solutions: int -> Number of solutions to generate
     """
     no_of_solutions: PositiveInt

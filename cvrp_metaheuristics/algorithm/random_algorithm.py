@@ -15,6 +15,16 @@ class RandomAlgorithm(Algorithm):
         pass
 
     def solve(self) -> list[Result]:
+        """
+        Solves the CVRP problem using a Random Algorithm
+
+        This method generates random solutions and selects the best one.
+
+        Returns:
+            list[Result]: A list of results, each containing the fitness of the best
+            individual, the average fitness of the generated solutions, and the genotype
+            of the best individual.
+        """
         no_of_solutions = self.config.no_of_solutions
         best = sys.float_info.max
         best_genotype = []
