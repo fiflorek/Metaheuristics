@@ -53,6 +53,17 @@ class TabuSearch(Algorithm):
         return self.config.mutation_type
 
     def solve(self) -> list[Result]:
+        """
+        Solves the CVRP problem using the Tabu Search algorithm.
+
+        This method iterates through generations, searching for the best solution
+        in the neighborhood and updating the tabu list to avoid revisiting solutions.
+
+        Returns:
+            list[Result]: A list of results, each containing the fitness of the best
+            individual, the average fitness of the neighborhood, and the genotype of
+            the best individual.
+        """
         results = []
         for i in range(1, self.generations):
             neighbours = self.search_neighbourhood()
@@ -63,7 +74,7 @@ class TabuSearch(Algorithm):
                 best_neighbour = self.change_neighbourhood()
             self.current_best = best_neighbour
             self.update_tabu(best_neighbour)
-            avg_fitness = round(sum([neighbour.fitness for neighbour in neighbours]) / len(neighbours), 2)
+            avg_fitness = sum([neighbour.fitness for neighbour in neighbours]) / len(neighbours)
             results.append(Result(self.current_best.fitness, avg_fitness, self.current_best.genotype))
 
         return results
@@ -79,9 +90,6 @@ class TabuSearch(Algorithm):
     def search_neighbourhood(self) -> list[Individual]:
         neighbours: list[Individual] = []
         for i in range(self.neighbourhood_size):
-            # TO CHECK: is it updated in place?
-            # neighbour_genotype = self.current_best.genotype[:]
-            # individual.mutate(neighbour_genotype, self.mutation_type)
             neighbour_genotype = mutate(self.current_best.genotype[:], self.mutation_type)
             neighbour = Individual(neighbour_genotype)
             neighbour.evaluate(self.cvrp)
@@ -91,11 +99,11 @@ class TabuSearch(Algorithm):
     def best_neighbour_not_in_tabu(self, neighbours: list[Individual]) -> Individual | None:
         best_neighbour = None
         best_neighbour_fitness = float('inf')
-        for i in range(1, len(neighbours)):
-            if (neighbours[i].fitness < best_neighbour_fitness
-                    and hash(tuple(neighbours[i].genotype)) not in self.tabu_set):
-                best_neighbour_fitness = neighbours[i].fitness
-                best_neighbour = neighbours[i]
+        for neighbour in neighbours:
+            if (neighbour.fitness < best_neighbour_fitness
+                    and hash(tuple(neighbour.genotype)) not in self.tabu_set):
+                best_neighbour_fitness = neighbour.fitness
+                best_neighbour = neighbour
         return best_neighbour
 
     def update_tabu(self, best_neighbour) -> None:

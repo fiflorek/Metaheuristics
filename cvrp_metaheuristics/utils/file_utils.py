@@ -13,12 +13,14 @@ root_dir = Path(__file__).resolve().parents[2]
 def save_results_to_file(result: Result, config: Config, execution_time: float) -> None:
     results_dir = get_or_create_results_dir(config.problem_instance, config.algorithm)
     results_file = results_dir / "results.txt"
+    config_file = results_dir / "config.json"
     with open(results_file, 'w') as file:
-        file.write(f"Best: {result.best}\n")
-        file.write(f"Average: {result.average}\n")
+        file.write(f"Best: {round(result.best, 2)}\n")
+        file.write(f"Average: {round(result.average, 2)}\n")
         file.write(f"Best genotype: {result.best_genotype}\n")
         file.write(f"Execution time: {execution_time}\n")
-        file.write(f"Configuration: \n{config.__str__()}\n")
+    with open(config_file, 'w') as file:
+        file.write(config.model_dump_json())
 
 
 # this method saves best run - file is later used to generate a plot
@@ -28,7 +30,7 @@ def save_best_run_to_file(best_run: list[tuple[float, float]], config: Config) -
 
     with open(best_run_file, 'w') as file:
         for generation, (best, avg) in enumerate(best_run):
-            file.write(f"{generation}, {best}, {avg}\n")
+            file.write(f"{generation}, {round(best, 2)}, {round(avg, 2)}\n")
 
 
 def get_or_create_results_dir(problem_instance, algorithm):
@@ -39,6 +41,18 @@ def get_or_create_results_dir(problem_instance, algorithm):
 
 
 def read_problem(file_path: Path) -> Cvrp:
+    """
+    Reads a CVRP problem instance from a file and returns a Cvrp object.
+
+    This function reads the number of cities, truck capacity, city coordinates, city demands, and depot number
+    from the specified file and constructs a Cvrp object representing the problem instance.
+
+    Args:
+        file_path (Path): The path to the file containing the CVRP problem instance.
+
+    Returns:
+        Cvrp: An object representing the CVRP problem instance.
+    """
     no_of_cities = 0
     truck_capacity = 0
     city_coordinates = []
