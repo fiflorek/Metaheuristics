@@ -15,9 +15,9 @@ from cvrp_metaheuristics.algorithm.random_algorithm import RandomAlgorithm
 from cvrp_metaheuristics.algorithm.result import Result
 from cvrp_metaheuristics.algorithm.tabu_search import TabuSearch
 from cvrp_metaheuristics.problem.cvrp import Cvrp
+from cvrp_metaheuristics.utils.config_help import configure_arg_parser
 from cvrp_metaheuristics.utils.enums import AlgorithmName
 from cvrp_metaheuristics.utils.file_utils import save_results_to_file, save_best_run_to_file, read_problem
-from cvrp_metaheuristics.utils.config_help import configure_arg_parser
 
 
 def solve_problem(cvrp: Cvrp, config) -> None:
@@ -93,7 +93,7 @@ def main():
     }
 
     config_class = config_mapping.get(AlgorithmName(configuration.get("algorithm", "greedy")))
-    config = config_class(configuration)
+    config = config_class(**configuration)
 
     cvrp = read_problem(data_set_dir / f'{config.problem_instance}.vrp')
 
