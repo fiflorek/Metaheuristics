@@ -65,7 +65,7 @@ class TabuSearch(Algorithm):
             the best individual.
         """
         results = []
-        for i in range(1, self.generations):
+        for i in range(0, self.generations):
             neighbours = self.search_neighbourhood()
             best_neighbour = self.best_neighbour_not_in_tabu(neighbours)
             # if all neighbours were already visited (are in tabu list) we're switching the neighbourhood drastically

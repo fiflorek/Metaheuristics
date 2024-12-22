@@ -28,3 +28,4 @@ class TabuSearchConfig(Config):
         if value < 1 or value > 10:
             raise ValueError('Number of runs has to be in range [1, 10]')
         return value
+
