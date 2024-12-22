@@ -29,6 +29,19 @@ def cross(parent_a: list[int], parent_b: list[int], crossover_type: Crossover) -
 
 
 def cross_ox(parent_a: list[int], parent_b: list[int]) -> list[int]:
+    """
+    Performs an Order Crossover (OX) on two parent genotypes to produce a child genotype.
+
+    The Order Crossover (OX) operator works by selecting a random segment from the first parent
+    and preserving the order of the remaining genes from the second parent.
+
+    Args:
+        parent_a (list[int]): The first parent genotype.
+        parent_b (list[int]): The second parent genotype.
+
+    Returns:
+        list[int]: The child genotype resulting from the crossover.
+    """
     child = [0 for _ in range(len(parent_a))]
     swap_index_a, swap_index_b = generate_two_random_indexes(len(parent_a) - 1)
     assigned_genes = set()
@@ -45,6 +58,20 @@ def cross_ox(parent_a: list[int], parent_b: list[int]) -> list[int]:
 
 
 def cross_pmx(parent_a: list[int], parent_b: list[int]) -> tuple[list[int], list[int]]:
+    """
+    Performs a Partially Mapped Crossover (PMX) on two parent genotypes to produce two child genotypes.
+
+    The Partially Mapped Crossover (PMX) operator works by selecting a random segment from the first parent
+    and mapping it to the corresponding segment in the second parent. The remaining genes are filled in
+    by preserving the order and position from the other parent.
+
+    Args:
+        parent_a (list[int]): The first parent genotype.
+        parent_b (list[int]): The second parent genotype.
+
+    Returns:
+        tuple[list[int], list[int]]: A tuple containing two child genotypes resulting from the crossover.
+    """
     swap_index_a, swap_index_b = generate_two_random_indexes(len(parent_a) - 1)
     child_a = parent_b
     child_b = parent_a
@@ -71,6 +98,17 @@ def mutate(individual: list[int], mutation_type: Mutation) -> list[int]:
 
 
 def mutate_swap(individual: list[int]) -> list[int]:
+    """
+    Performs a swap mutation on an individual's genotype.
+
+    This mutation selects two random indices in the genotype and swaps their values.
+
+    Args:
+        individual (list[int]): The genotype of the individual to be mutated.
+
+    Returns:
+        list[int]: The mutated genotype with two values swapped.
+    """
     swap_index_a, swap_index_b = generate_two_random_indexes(len(individual) - 1)
 
     swap(individual, swap_index_a, swap_index_b)
@@ -79,6 +117,17 @@ def mutate_swap(individual: list[int]) -> list[int]:
 
 
 def mutate_inversion(individual: list[int]) -> list[int]:
+    """
+    Performs an inversion mutation on an individual's genotype.
+
+    This mutation selects two random indices in the genotype and reverses the order of the genes between these indices.
+
+    Args:
+        individual (list[int]): The genotype of the individual to be mutated.
+
+    Returns:
+        list[int]: The mutated genotype with the order of genes between two indices reversed.
+    """
     swap_index_a, swap_index_b = generate_two_random_indexes(len(individual) - 1)
 
     while swap_index_a < swap_index_b:

@@ -40,11 +40,28 @@ class Cvrp:
 
 
 def distance(city_a: City, city_b: City) -> float:
-    return round(math.sqrt((city_a.x - city_b.x) ** 2 + (city_a.y - city_b.y) ** 2), 2)
+    return math.sqrt((city_a.x - city_b.x) ** 2 + (city_a.y - city_b.y) ** 2)
 
 
-# take into account when truck is ie. 80% empty - maybe then turn back instead of going to depot only when its empty
+#  TO DO: when truck is i.e. 80% empty - maybe then turn back instead of going to depot only when its empty
+# I would like to make a check, if let's say truck has enough capacity for only one more city:
+# is it better to go back now and refill later, or go to the next city and then go back to depot
+# which basically is checking if city_a -> depot -> city_b < depot -> city_a -> city_b
+
 def cost(cvrp: Cvrp, route: list[int]) -> float:
+    """
+    Calculates the total cost of a given route for the CVRP problem.
+
+    The cost is calculated based on the distances between cities and the truck's capacity.
+    If the truck's capacity is insufficient to visit the next city, it returns to the depot to refill.
+
+    Args:
+        cvrp (Cvrp): The CVRP problem instance containing cities, distances, and truck capacity.
+        route (list[int]): A list of city numbers representing the route to be evaluated.
+
+    Returns:
+        float: The total cost of the route.
+    """
     # first step is from depot to first city
     depot_city_number = cvrp.depot_number
     first_city = cvrp.cities[route[0]]
@@ -62,4 +79,4 @@ def cost(cvrp: Cvrp, route: list[int]) -> float:
         route_cost += cvrp.distances_matrix[current_city_number][next_city.city_number]
         current_truck_capacity -= next_city.demand
     route_cost += cvrp.distances_matrix[depot_city_number][last_city.city_number]
-    return round(route_cost, 2)
+    return route_cost

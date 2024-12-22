@@ -1,18 +1,31 @@
-import random
 import sys
 
 from cvrp_metaheuristics.algorithm.algorithm import Algorithm
+from cvrp_metaheuristics.algorithm.config.random_config import RandomConfig
 from cvrp_metaheuristics.algorithm.result import Result
 from cvrp_metaheuristics.problem.cvrp import cost
+from cvrp_metaheuristics.utils.init_methods import init_random_genotype
 
 
 class RandomAlgorithm(Algorithm):
+
+    config: RandomConfig
 
     def _initialize_algorithm(self) -> None:
         pass
 
     def solve(self) -> list[Result]:
-        no_of_solutions = self.config.population_size * self.config.generations
+        """
+        Solves the CVRP problem using a Random Algorithm
+
+        This method generates random solutions and selects the best one.
+
+        Returns:
+            list[Result]: A list of results, each containing the fitness of the best
+            individual, the average fitness of the generated solutions, and the genotype
+            of the best individual.
+        """
+        no_of_solutions = self.config.no_of_solutions
         best = sys.float_info.max
         best_genotype = []
         average = 0.0
@@ -25,10 +38,9 @@ class RandomAlgorithm(Algorithm):
             average += solution_cost
         average /= no_of_solutions
 
-        self.result_list.append(Result(best, round(average, 2), best_genotype))
+        self.result_list.append(Result(best, average, best_genotype))
 
         return self.result_list
 
     def generate_random_solution(self) -> list[int]:
-        city_ids = list(range(1, self.no_of_cities))
-        return random.sample(city_ids, len(city_ids))
+        return init_random_genotype(self.cvrp)
