@@ -1,4 +1,4 @@
-from typing import Self
+from typing_extensions import Self
 
 from pydantic import PositiveInt, model_validator, field_validator
 
@@ -34,7 +34,7 @@ class GeneticConfig(Config):
     @model_validator(mode='after')
     def is_less_than_pop_size(self) -> Self:
         if 0 > self.tournament_size or self.tournament_size >= self.population_size:
-            raise ValueError(f'Tournament size has to be in range [1, population_size]')
+            raise ValueError('Tournament size has to be in range [1, population_size]')
         return self
 
     @field_validator('crossover_probability', 'mutation_probability')

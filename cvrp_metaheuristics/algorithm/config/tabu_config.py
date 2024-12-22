@@ -1,4 +1,4 @@
-from pydantic import PositiveInt, BaseModel, field_validator
+from pydantic import PositiveInt, field_validator
 
 from cvrp_metaheuristics.algorithm.config.configuration import Config
 from cvrp_metaheuristics.utils.enums import Mutation, Initialization
@@ -12,8 +12,8 @@ class TabuSearchConfig(Config):
         no_of_runs (int): How many times the algorithm should be run.
         generations (int): Number of generations (within one run of the algorithm).
         init_type (Initialization): Type of initialization, currently supported are: greedy, random.
-        neighbourhood_size (int): Number of neighbours to visit in each generation. A neighbour is defined as 'one mutation away' from the current solution.
-        tabu_list_size (int): Size of the tabu list. The purpose of the tabu list is to prevent the algorithm from looping through the same neighbourhoods.
+        neighbourhood_size (int): Number of neighbours to visit in each generation.
+        tabu_list_size (int): Size of the tabu list.
         mutation_type (Mutation): Type of mutation, currently supported are: swap, inversion.
     """
     no_of_runs: int
